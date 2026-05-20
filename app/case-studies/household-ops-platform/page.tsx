@@ -15,6 +15,7 @@
  */
 
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -227,29 +228,34 @@ export default function CaseStudy() {
       <Section eyebrow="The product" title="What it looks like">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <ImageSlot
-            label="Investments"
-            caption="Allocation, top holdings and a P&L chart from the event-sourced portfolio."
-            filename="investments.png"
+            label="Insurance · Dashboard"
+            caption="Outstanding vs reimbursed, total claims, reimbursement rate, plus a 'Needs attention' queue of drafts and submitted-but-unpaid claims. Acts as the household's working surface, not just a report."
+            filename="claims-dashboard.jpg"
+            alt="Insurance Claims dashboard with KPIs for outstanding, reimbursed, total claims and reimbursement rate, plus a Needs Attention queue and breakdowns by year, person, status and type."
           />
           <ImageSlot
-            label="Insurance claim — AI showcase"
-            caption="Prefilled claim form with AI-filled badges, attachment preview, and the raw extraction collapsed below."
-            filename="claim-detail.png"
+            label="Insurance · Analytics"
+            caption="Claimed vs reimbursed by year, distribution by type, person and status. The same data the dashboard surfaces, rendered for trend reading rather than action."
+            filename="insurance-analytics.jpg"
+            alt="Insurance Analytics view with a bar chart of claimed vs reimbursed by year, a donut chart of claims by type, a horizontal bar chart of claims by person and a status distribution stack."
           />
           <ImageSlot
-            label="Budget — Cash Flow Lite"
-            caption="Monthly cash flow estimated from income, contributions and net-worth movement."
-            filename="budget.png"
+            label="Budget · Balance sheet"
+            caption="Multi-currency net worth with per-country accounts (CHF / EUR / GBP / PLN) and monthly FX conversion. Cash Flow Lite chooses less reporting on purpose."
+            filename="budget.jpg"
+            alt="Budget Balance Sheet showing total net worth in CHF with per-country breakdowns for United Kingdom, Euro Zone, Poland and Switzerland."
           />
           <ImageSlot
-            label="Lab result"
-            caption="Verified results with reference-range flags; trends roll up across years of documents."
-            filename="lab-result.png"
+            label="Lab results · Trends"
+            caption="Verified lab values plotted over time against the reference range. Deterministic pdfplumber pipeline parses results from upload; the human verifies before they enter the trend."
+            filename="lab-result.jpg"
+            alt="Lab results trends page showing a bar chart of glucose values over 12 data points across a year, with reference range and a table of dated readings."
           />
           <ImageSlot
             label="Plants"
-            caption="Moisture timeline per plant; readings from manual entry or an Arduino device."
-            filename="plants.png"
+            caption="Per-plant moisture timelines, room labels, status badges. Readings arrive from manual entry or an Arduino device hitting a hardened HTTPS endpoint with a per-household key."
+            filename="plants.jpg"
+            alt="Plants module dashboard with cards for six plants showing species, room, current moisture percentage and status; one plant is in LOW state, others OK."
             wide
           />
         </div>
@@ -598,30 +604,31 @@ function ImageSlot({
   caption,
   filename,
   wide,
+  alt,
 }: {
   label: string;
   caption: string;
   filename: string;
   wide?: boolean;
+  alt: string;
 }) {
   return (
     <figure className={wide ? "md:col-span-2" : ""}>
-      {/* SCREENSHOT: /public/case-studies/oikero/{filename} */}
-      <div className="grid aspect-[4/3] place-items-center overflow-hidden rounded-2xl border border-dashed border-stone-300/80 bg-[#f3ecdf]/60 text-center">
-        <div className="px-6">
-          <p
-            className="text-base font-semibold text-stone-800"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            {label}
-          </p>
-          <p className="mt-1 text-xs text-stone-500">
-            Drop screenshot at{" "}
-            <code className="rounded bg-white/70 px-1.5 py-0.5 text-[11px]">
-              /public/case-studies/oikero/{filename}
-            </code>
-          </p>
-        </div>
+      <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-stone-200/60 bg-[#0a0d12] shadow-[0_18px_48px_rgba(15,32,40,0.20)]">
+        <span className="absolute left-4 top-4 z-10 rounded-full bg-white/15 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/90 backdrop-blur-sm">
+          {label}
+        </span>
+        <Image
+          src={`/case-studies/oikero/${filename}`}
+          alt={alt}
+          fill
+          sizes={
+            wide
+              ? "(min-width: 768px) 1000px, 100vw"
+              : "(min-width: 768px) 500px, 100vw"
+          }
+          className="object-cover object-top"
+        />
       </div>
       <figcaption className="mt-2 text-[13px] leading-[1.55] text-stone-600">
         {caption}
@@ -633,32 +640,21 @@ function ImageSlot({
 function HeroDashboardSlot() {
   return (
     <figure>
-      {/* SCREENSHOT: /public/case-studies/oikero/home.png — the home
-          control-centre with five module tiles. Dark mode. This is
-          the hero visual: breadth in one glance. */}
-      <div className="grid aspect-[16/10] place-items-center overflow-hidden rounded-3xl border border-dashed border-emerald-500/30 bg-gradient-to-br from-emerald-500/[0.10] via-white/60 to-white/40 text-center">
-        <div className="px-6">
-          <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-stone-500">
-            Hero · Home dashboard
-          </p>
-          <p
-            className="mt-2 text-lg font-semibold text-stone-800"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            Five module tiles, household control centre
-          </p>
-          <p className="mt-1 text-xs text-stone-500">
-            Drop at{" "}
-            <code className="rounded bg-white/70 px-1.5 py-0.5 text-[11px]">
-              /public/case-studies/oikero/home.png
-            </code>
-          </p>
-        </div>
+      <div className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-stone-200/60 bg-[#0a0d12] shadow-[0_24px_72px_rgba(15,32,40,0.25)]">
+        <Image
+          src="/case-studies/oikero/investments.jpg"
+          alt="Investments dashboard of the household operations platform — total value, daily change, valuation coverage, portfolio performance chart and period P/L."
+          fill
+          sizes="(min-width: 768px) 1000px, 100vw"
+          className="object-cover object-top"
+          priority
+        />
       </div>
       <figcaption className="mt-3 text-[14px] leading-[1.55] text-stone-600">
-        Home — five modules sharing one auth, one household model, one
-        storage pattern. The attention strip surfaces only what needs
-        action across all of them.
+        Investments — event-sourced portfolio derived from a
+        portfolio_events log, valued daily against yfinance and
+        Frankfurter feeds. One of five modules sharing the same auth,
+        household model and storage pattern.
       </figcaption>
     </figure>
   );

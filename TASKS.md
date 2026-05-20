@@ -36,6 +36,15 @@ This is the bottleneck. Everything else can wait.
 
 ### Screenshots
 
+- [x] **French app — 4 screenshots wired** → `public/case-studies/french-ai/` (notes-before, card-after, home, parcours). Scanner upload + revision library + standalone card detail not yet captured — case study tour trimmed accordingly.
+- [x] **Oikero — 6 screenshots wired** → `public/case-studies/oikero/` (investments as hero, claims-dashboard, insurance-analytics, budget, lab-result, plants). 5-module home hero and claim-detail-with-AI-prefill not yet captured — hero uses investments instead.
+- [ ] (Later) Optional: capture the missing French app screens (scanner, revision, card detail) and the missing Oikero screens (5-module home, claim-detail with AI prefill) to round out the product tour.
+
+### ~~Original shotlist — completed above~~
+
+<details>
+<summary>Original detailed list (kept for reference)</summary>
+
 - [ ] **French app — 7 screenshots** → `public/case-studies/french-ai/`
   - `notes-before.jpg` — a page of handwritten French notes (write a few lines yourself, don't use real tutor notes)
   - `card-after.png` — the generated vocab card UI
@@ -51,9 +60,9 @@ This is the bottleneck. Everything else can wait.
   - `budget.png` — Cash Flow Lite KPIs + chart (mock income/expenses)
   - `lab-result.png` — Lab result detail with reference-range flags (mock person + lab + values)
   - `plants.png` — Plants list or detail with moisture timeline
-- [ ] Swap placeholder boxes for real images
-  - In `app/case-studies/french-ai-learning-app/page.tsx` replace `<ImageSlot>` / `<BeforeAfterSlot>` inner content with `<Image src=… />` from `next/image`
-  - Same in `app/case-studies/household-ops-platform/page.tsx` for `<ImageSlot>` / `<HeroDashboardSlot>`
+- [x] Swap placeholder boxes for real images (done — both case studies render via `next/image`)
+
+</details>
 
 ### Open Graph image — preview card when link is shared
 

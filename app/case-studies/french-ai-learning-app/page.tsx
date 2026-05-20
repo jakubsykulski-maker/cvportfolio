@@ -13,6 +13,7 @@
  */
 
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -142,30 +143,16 @@ export default function CaseStudy() {
       <Section eyebrow="The product" title="What it does">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <ImageSlot
-            label="Home dashboard"
-            caption="Three entry points: weekly course path, revision library, scanner."
-            filename="home.png"
-          />
-          <ImageSlot
-            label="Scanner upload"
-            caption="Pick focuses (vocabulary, grammar, conjugation, translation) and upload."
-            filename="scanner.png"
-          />
-          <ImageSlot
-            label="Generated vocabulary card"
-            caption="Each word: gender, translation, example sentence, conjugation when relevant."
-            filename="card.png"
-          />
-          <ImageSlot
-            label="Revision library"
-            caption="Grammar, conjugation and curated examples — one searchable library."
-            filename="revision.png"
+            label="Home"
+            caption="Three entry points: weekly course path, revision library, scanner. The big calm title is on purpose — most learning apps shout, this one breathes."
+            filename="home.jpg"
+            alt="Home dashboard of the French learning app with three large tiles linking to weekly course path, revision library and scanner."
           />
           <ImageSlot
             label="Weekly course path"
-            caption="Sections in order, mirroring the rhythm of the actual class."
-            filename="parcours.png"
-            wide
+            caption="Each week opens to its sections in order, printable in one click. Scanned fiches attach to the week they belong to, so revision stays close to the lesson."
+            filename="parcours.jpg"
+            alt="Weekly course path view showing the active week's sections, attached scanned fiches and printing controls."
           />
         </div>
       </Section>
@@ -450,36 +437,38 @@ function StackBox({ label, items }: { label: string; items: string[] }) {
 }
 
 /**
- * Image placeholder — shows a clearly-labelled box where a real .png
- * will live. Swap the inner content for <Image src=... /> from
- * next/image once you drop the screenshot at the indicated path.
+ * Product screenshot — renders the real PNG/JPG from
+ * /public/case-studies/french-ai/ at its natural aspect ratio.
+ * `object-cover object-top` keeps the visually meaningful top of
+ * the screenshot (header + first rows) visible even when ratios
+ * differ across slots.
  */
 function ImageSlot({
   label,
   caption,
   filename,
   wide,
+  alt,
 }: {
   label: string;
   caption: string;
   filename: string;
   wide?: boolean;
+  alt: string;
 }) {
   return (
     <figure className={wide ? "md:col-span-2" : ""}>
-      {/* SCREENSHOT: /public/case-studies/french-ai/{filename} */}
-      <div className="grid aspect-[4/3] place-items-center overflow-hidden rounded-2xl border border-dashed border-stone-300/80 bg-[#f3ecdf]/60 text-center">
-        <div className="px-6">
-          <p
-            className="text-base font-semibold text-stone-800"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            {label}
-          </p>
-          <p className="mt-1 text-xs text-stone-500">
-            Drop screenshot at <code className="rounded bg-white/70 px-1.5 py-0.5 text-[11px]">/public/case-studies/french-ai/{filename}</code>
-          </p>
-        </div>
+      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-stone-200/80 bg-[#f3ecdf]/40">
+        <span className="absolute left-4 top-4 z-10 rounded-full bg-white/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-stone-600 shadow-sm">
+          {label}
+        </span>
+        <Image
+          src={`/case-studies/french-ai/${filename}`}
+          alt={alt}
+          fill
+          sizes="(min-width: 768px) 50vw, 100vw"
+          className="object-cover object-top"
+        />
       </div>
       <figcaption className="mt-2 text-[13px] leading-[1.55] text-stone-600">
         {caption}
@@ -489,8 +478,14 @@ function ImageSlot({
 }
 
 /**
- * Hero before/after — same idea as ImageSlot, but two side-by-side
- * boxes carrying the entire pitch in one glance.
+ * Hero before/after — two side-by-side images carrying the whole
+ * pitch in one glance. Handwritten notes on the left, structured
+ * vocabulary card on the right.
+ *
+ * The card screenshot is taller than the notes (portrait), so we
+ * use object-cover with object-top to crop the bottom while keeping
+ * the header + first rows visible. Both panels share a 4/3 box so
+ * the pair stays visually balanced.
  */
 function BeforeAfterSlot({
   kind,
@@ -500,33 +495,35 @@ function BeforeAfterSlot({
   caption: string;
 }) {
   const label = kind === "before" ? "BEFORE" : "AFTER";
-  const filename = kind === "before" ? "notes-before.jpg" : "card-after.png";
-  const accent =
+  const filename = kind === "before" ? "notes-before.jpg" : "card-after.jpg";
+  const alt =
     kind === "before"
-      ? "border-stone-300/80 bg-[#f3ecdf]/70"
-      : "border-[#5d6fff]/30 bg-gradient-to-br from-[#5d6fff]/[0.08] via-white/60 to-white/40";
+      ? "A page of handwritten French class notes — vocabulary, expressions and full sentences for the topic 'Se décrire professionnellement'."
+      : "Generated vocabulary card from the same notes — 14 entries with French definitions, English translations and part-of-speech tags.";
+  const ringColor =
+    kind === "before"
+      ? "border-stone-300/80 bg-[#f3ecdf]/40"
+      : "border-[#5d6fff]/30 bg-gradient-to-br from-[#5d6fff]/[0.06] via-white/40 to-white/40";
   return (
     <figure>
-      {/* SCREENSHOT: /public/case-studies/french-ai/{filename} */}
       <div
-        className={`grid aspect-[4/3] place-items-center overflow-hidden rounded-3xl border border-dashed ${accent} text-center`}
+        className={`relative aspect-[4/3] overflow-hidden rounded-3xl border ${ringColor}`}
       >
-        <div className="px-6">
-          <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-stone-500">
-            {label}
-          </p>
-          <p
-            className="mt-2 text-lg font-semibold text-stone-800"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            {kind === "before"
-              ? "Handwritten classroom notes"
-              : "Structured vocabulary card"}
-          </p>
-          <p className="mt-1 text-xs text-stone-500">
-            Drop at <code className="rounded bg-white/70 px-1.5 py-0.5 text-[11px]">/public/case-studies/french-ai/{filename}</code>
-          </p>
-        </div>
+        <span className="absolute left-4 top-4 z-10 rounded-full bg-white/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-stone-600 shadow-sm">
+          {label}
+        </span>
+        <Image
+          src={`/case-studies/french-ai/${filename}`}
+          alt={alt}
+          fill
+          sizes="(min-width: 768px) 50vw, 100vw"
+          className={
+            kind === "before"
+              ? "object-cover object-center"
+              : "object-cover object-top"
+          }
+          priority={kind === "before"}
+        />
       </div>
       <figcaption className="mt-3 text-[14px] leading-[1.55] text-stone-600">
         {caption}

@@ -29,6 +29,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# Working copy of source screenshots — published versions live in
+# public/case-studies/ already, no need to ship the originals.
+Photos/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
