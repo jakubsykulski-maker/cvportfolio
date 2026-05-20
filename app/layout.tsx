@@ -15,9 +15,21 @@ const literata = Literata({
   display: "swap",
 });
 
+/**
+ * OG title + description tuned to LinkedIn / Twitter / Slack
+ * preview-card character budgets:
+ *   - title:       50–60 characters (this one ≈ 58)
+ *   - description: 110–160 characters (this one ≈ 155)
+ * Below those, social cards look thin; above, they get truncated
+ * mid-word. Counts checked manually via opengraph.xyz.
+ */
+const OG_TITLE = "Jakub Sykulski — Operations, Analytics & AI tooling";
+const OG_DESCRIPTION =
+  "Operations and analytics professional with 8+ years across BIS, Stuart (DPD) and FlixBus. Now building AI-assisted internal tools — case studies inside.";
+
 export const metadata: Metadata = {
-  title: `${site.name} — ${site.title}`,
-  description: site.summary,
+  title: OG_TITLE,
+  description: OG_DESCRIPTION,
   // Unlisted — recruiters reach this via direct CV link, not search engines.
   robots: {
     index: false,
@@ -26,13 +38,20 @@ export const metadata: Metadata = {
   },
   authors: [{ name: site.name }],
   openGraph: {
-    title: site.name,
-    description: site.title,
+    title: OG_TITLE,
+    description: OG_DESCRIPTION,
     type: "website",
+    siteName: "jakubsykulski.com",
     // Generated manually from /public/og.html (see comments at the
     // top of that file for the screenshot workflow). Drop the resulting
     // 1200×630 PNG at /public/og.png. Until then, LinkedIn previews
     // show the grey default — fine, but not great.
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: OG_TITLE }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: OG_TITLE,
+    description: OG_DESCRIPTION,
     images: ["/og.png"],
   },
 };

@@ -32,6 +32,7 @@ import {
 } from "lucide-react";
 import { Hairline, Section } from "@/components/section";
 import { CopyButton } from "@/components/copy-button";
+import { ProjectMeta } from "@/components/project-meta";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -93,7 +94,7 @@ export default function CaseStudy() {
         </div>
 
         {/* Before / After visual — the whole pitch in one image pair. */}
-        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="mt-12 grid grid-cols-1 items-start gap-6 md:grid-cols-2">
           <BeforeAfterSlot
             kind="before"
             caption="A page of handwritten French class notes — what the learner brings in."
@@ -104,6 +105,16 @@ export default function CaseStudy() {
           />
         </div>
       </header>
+
+      <ProjectMeta
+        rows={[
+          { label: "Timeline", value: "Sept 2025 – present" },
+          { label: "Role", value: "Product · data model · prompt design · AI integration" },
+          { label: "Stack", value: "Next.js · FastAPI · Supabase · Gemini" },
+          { label: "Users", value: "Owner + classmates (~10), private" },
+          { label: "Status", value: "Working prototype · in daily use" },
+        ]}
+      />
 
       <Hairline />
 
@@ -141,17 +152,21 @@ export default function CaseStudy() {
 
       {/* ── Product tour ─────────────────────────────────────────── */}
       <Section eyebrow="The product" title="What it does">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2">
           <ImageSlot
             label="Home"
             caption="Three entry points: weekly course path, revision library, scanner. The big calm title is on purpose — most learning apps shout, this one breathes."
             filename="home.jpg"
+            width={1309}
+            height={997}
             alt="Home dashboard of the French learning app with three large tiles linking to weekly course path, revision library and scanner."
           />
           <ImageSlot
             label="Weekly course path"
             caption="Each week opens to its sections in order, printable in one click. Scanned fiches attach to the week they belong to, so revision stays close to the lesson."
             filename="parcours.jpg"
+            width={1314}
+            height={1272}
             alt="Weekly course path view showing the active week's sections, attached scanned fiches and printing controls."
           />
         </div>
@@ -281,7 +296,7 @@ export default function CaseStudy() {
             "Designed the data model — typed content blocks, multi-focus extraction, structured Gemini output.",
             "Wrote the prompt architecture, including the security directive and per-focus extraction strategy.",
             "Directed and reviewed AI-assisted code generation across frontend, backend and SQL.",
-            "Tested, iterated and shipped through real classroom use with my own French course.",
+            "Tested and iterated through real classroom use with my own French course.",
             "Made the calls on what to drop — half-built scope is tax on every future change.",
           ].map((line) => (
             <li key={line} className="relative pl-5">
@@ -449,25 +464,30 @@ function ImageSlot({
   filename,
   wide,
   alt,
+  width,
+  height,
 }: {
   label: string;
   caption: string;
   filename: string;
   wide?: boolean;
   alt: string;
+  width: number;
+  height: number;
 }) {
   return (
     <figure className={wide ? "md:col-span-2" : ""}>
-      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-stone-200/80 bg-[#f3ecdf]/40">
+      <div className="relative overflow-hidden rounded-2xl border border-stone-200/80 bg-[#f3ecdf]/40">
         <span className="absolute left-4 top-4 z-10 rounded-full bg-white/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-stone-600 shadow-sm">
           {label}
         </span>
         <Image
           src={`/case-studies/french-ai/${filename}`}
           alt={alt}
-          fill
+          width={width}
+          height={height}
           sizes="(min-width: 768px) 50vw, 100vw"
-          className="object-cover object-top"
+          className="block h-auto w-full"
         />
       </div>
       <figcaption className="mt-2 text-[13px] leading-[1.55] text-stone-600">
@@ -496,6 +516,11 @@ function BeforeAfterSlot({
 }) {
   const label = kind === "before" ? "BEFORE" : "AFTER";
   const filename = kind === "before" ? "notes-before.jpg" : "card-after.jpg";
+  // Natural dimensions — Image renders at full aspect, no crop.
+  const dims =
+    kind === "before"
+      ? { w: 1999, h: 1499 } // notes — 4:3 landscape
+      : { w: 1302, h: 1236 }; // card — near-square portrait
   const alt =
     kind === "before"
       ? "A page of handwritten French class notes — vocabulary, expressions and full sentences for the topic 'Se décrire professionnellement'."
@@ -507,7 +532,7 @@ function BeforeAfterSlot({
   return (
     <figure>
       <div
-        className={`relative aspect-[4/3] overflow-hidden rounded-3xl border ${ringColor}`}
+        className={`relative overflow-hidden rounded-3xl border ${ringColor}`}
       >
         <span className="absolute left-4 top-4 z-10 rounded-full bg-white/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-stone-600 shadow-sm">
           {label}
@@ -515,13 +540,10 @@ function BeforeAfterSlot({
         <Image
           src={`/case-studies/french-ai/${filename}`}
           alt={alt}
-          fill
+          width={dims.w}
+          height={dims.h}
           sizes="(min-width: 768px) 50vw, 100vw"
-          className={
-            kind === "before"
-              ? "object-cover object-center"
-              : "object-cover object-top"
-          }
+          className="block h-auto w-full"
           priority={kind === "before"}
         />
       </div>

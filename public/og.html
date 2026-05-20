@@ -118,6 +118,26 @@
       margin-left: 12px;
     }
 
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 22px;
+      border-radius: 12px;
+      background: var(--accent-deep);
+      color: white;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.005em;
+      box-shadow: 0 8px 24px rgba(26, 47, 115, 0.25);
+    }
+
+    .cta::after {
+      content: "→";
+      font-size: 22px;
+      line-height: 1;
+    }
+
     .url {
       font-size: 22px;
       font-weight: 600;
@@ -176,7 +196,7 @@
 
   <div class="footer">
     <div class="name">Jakub Sykulski <span>· Nyon, Switzerland</span></div>
-    <div class="url">jakubsykulski.com</div>
+    <span class="cta">View case studies</span>
   </div>
 </body>
 </html>

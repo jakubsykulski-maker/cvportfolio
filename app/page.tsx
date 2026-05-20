@@ -91,7 +91,7 @@ export default function Home() {
       </header>
 
       {/* ── Now — current focus + what you're open to ─────────────── */}
-      <Section eyebrow={`Now · ${now.month}`} title="Currently shipping">
+      <Section eyebrow={`Now · ${now.month}`} title="What I'm working on">
         <ul className="grid grid-cols-1 gap-3 text-[15.5px] leading-[1.7] text-stone-700 md:grid-cols-3">
           {now.bullets.map((line, i) => (
             <li

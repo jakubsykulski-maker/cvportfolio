@@ -13,7 +13,7 @@ export const site = {
   languages: "EN proficient · FR intermediate · PL native",
 
   summary:
-    "Operations and analytics professional with 8+ years across the Bank for International Settlements, Stuart (DPD Group), and FlixBus. Since 2025, prototyping AI-assisted internal tools around a single pattern — messy input becomes structured, validated, auditable data — with two shipped instances so far: a household operations platform and a language-learning app.",
+    "Operations and analytics professional with 8+ years across the Bank for International Settlements, Stuart (DPD Group), and FlixBus. Since 2025, building AI-assisted internal prototypes around a single pattern — messy input becomes structured, validated, auditable data. Two working prototypes so far, both private and in daily use: a household operations platform and a language-learning app.",
 
   email: "jakub.sykulski@gmail.com",
   phone: "+41 76 746 5124",
@@ -36,7 +36,7 @@ export type CaseStudy = {
   title: string;
   oneLiner: string;
   domain: string; // e.g. "Education · Knowledge workflows"
-  status: "Live, private" | "In progress" | "Concept";
+  status: "Private · in daily use" | "Private · in progress" | "Concept";
   href: string;
   accent: "blue" | "amber" | "emerald";
 };
@@ -48,7 +48,7 @@ export const caseStudies: CaseStudy[] = [
     oneLiner:
       "Five-module household OS — investments, insurance, budget, lab results, plants — with AI-assisted insurance claim intake via Gemini.",
     domain: "Insurance · Wealth · Health · Document AI",
-    status: "Live, private",
+    status: "Private · in daily use",
     href: "/case-studies/household-ops-platform",
     accent: "emerald",
   },
@@ -58,7 +58,7 @@ export const caseStudies: CaseStudy[] = [
     oneLiner:
       "Photo of handwritten classroom notes → structured vocabulary cards, explanations and revision material, via Gemini.",
     domain: "Education · Knowledge workflows",
-    status: "Live, private",
+    status: "Private · in daily use",
     href: "/case-studies/french-ai-learning-app",
     accent: "blue",
   },
@@ -70,7 +70,7 @@ export const experience = [
     org: "Independent · Switzerland",
     period: "September 2025 – Present",
     bullets: [
-      "Working a single pattern across two shipped prototypes: messy input → structured, validated data via Gemini with response_schema, persisted with audit trail and human review.",
+      "Working a single pattern across two working prototypes: messy input → structured, validated data via Gemini with response_schema, persisted with audit trail and human review. Both private, both in daily use.",
       "Oikero — modular household operations platform (investments, insurance claims, budget, lab results, plants) with AI-assisted claim document intake (Gemini 2.5 Flash → Pydantic-validated claim fields). Event-sourced investments, immutable audit log, household-scoped Row Level Security as defence-in-depth.",
       "French Learning App — photo of handwritten classroom notes → structured vocabulary cards with multi-focus extraction (vocab, grammar, conjugation, translation), print-ready revision output. Three-layer defence against prompt injection.",
       "Across both: defined the data model, designed the prompt architecture, made the product cuts, and accelerated implementation with Cursor, Claude Code and Codex.",
@@ -110,14 +110,14 @@ export const experience = [
 ];
 
 /**
- * What you're shipping this month + what you're open to. Recruiter
+ * What you're working on this month + what you're open to. Recruiter
  * reads this in 5 seconds and knows whether to bother. Update the
  * `month` string when you cycle.
  */
 export const now = {
   month: "November 2026",
   bullets: [
-    "Shipping a household operations platform (Oikero) — five modules, AI-assisted insurance claim intake live for two users.",
+    "Iterating on a household operations platform (Oikero) — five modules in daily use, AI-assisted insurance claim intake working end-to-end for two household members.",
     "Hardening the French learning app — multi-focus scan reliability, partial-success UX, public sanitized architecture docs.",
     "Open to Data, BI, Operations and Product roles in the Geneva-Lausanne-Zurich area. Insurance, wealth and healthtech especially welcome.",
   ],

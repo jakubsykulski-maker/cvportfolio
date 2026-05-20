@@ -39,6 +39,7 @@ import {
 } from "lucide-react";
 import { Hairline, Section } from "@/components/section";
 import { CopyButton } from "@/components/copy-button";
+import { ProjectMeta } from "@/components/project-meta";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -81,7 +82,7 @@ export default function CaseStudy() {
           plant monitoring — sharing one household-scoped data model. The AI
           core turns insurance claim documents into structured, validated
           claim fields through Gemini with response_schema and human review.
-          Built privately for one household; the architecture is the
+          A private working prototype for one household; the architecture is the
           transferable part.
         </p>
 
@@ -107,6 +108,16 @@ export default function CaseStudy() {
           <HeroDashboardSlot />
         </div>
       </header>
+
+      <ProjectMeta
+        rows={[
+          { label: "Timeline", value: "2024 – present" },
+          { label: "Role", value: "Product · architecture · data model · AI integration" },
+          { label: "Stack", value: "Next.js · FastAPI · Supabase · Gemini · Arduino" },
+          { label: "Users", value: "Owner + spouse, single household" },
+          { label: "Status", value: "Working prototype · in daily use" },
+        ]}
+      />
 
       <Hairline />
 
@@ -226,37 +237,46 @@ export default function CaseStudy() {
 
       {/* ── Product screenshots ──────────────────────────────────── */}
       <Section eyebrow="The product" title="What it looks like">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="space-y-10 md:space-y-14">
           <ImageSlot
             label="Insurance · Dashboard"
             caption="Outstanding vs reimbursed, total claims, reimbursement rate, plus a 'Needs attention' queue of drafts and submitted-but-unpaid claims. Acts as the household's working surface, not just a report."
             filename="claims-dashboard.jpg"
+            width={2268}
+            height={1246}
             alt="Insurance Claims dashboard with KPIs for outstanding, reimbursed, total claims and reimbursement rate, plus a Needs Attention queue and breakdowns by year, person, status and type."
           />
           <ImageSlot
             label="Insurance · Analytics"
             caption="Claimed vs reimbursed by year, distribution by type, person and status. The same data the dashboard surfaces, rendered for trend reading rather than action."
             filename="insurance-analytics.jpg"
+            width={2313}
+            height={1272}
             alt="Insurance Analytics view with a bar chart of claimed vs reimbursed by year, a donut chart of claims by type, a horizontal bar chart of claims by person and a status distribution stack."
           />
           <ImageSlot
             label="Budget · Balance sheet"
             caption="Multi-currency net worth with per-country accounts (CHF / EUR / GBP / PLN) and monthly FX conversion. Cash Flow Lite chooses less reporting on purpose."
             filename="budget.jpg"
+            width={2370}
+            height={1118}
             alt="Budget Balance Sheet showing total net worth in CHF with per-country breakdowns for United Kingdom, Euro Zone, Poland and Switzerland."
           />
           <ImageSlot
             label="Lab results · Trends"
             caption="Verified lab values plotted over time against the reference range. Deterministic pdfplumber pipeline parses results from upload; the human verifies before they enter the trend."
             filename="lab-result.jpg"
+            width={2277}
+            height={1030}
             alt="Lab results trends page showing a bar chart of glucose values over 12 data points across a year, with reference range and a table of dated readings."
           />
           <ImageSlot
             label="Plants"
             caption="Per-plant moisture timelines, room labels, status badges. Readings arrive from manual entry or an Arduino device hitting a hardened HTTPS endpoint with a per-household key."
             filename="plants.jpg"
+            width={2246}
+            height={992}
             alt="Plants module dashboard with cards for six plants showing species, room, current moisture percentage and status; one plant is in LOW state, others OK."
-            wide
           />
         </div>
       </Section>
@@ -603,34 +623,37 @@ function ImageSlot({
   label,
   caption,
   filename,
-  wide,
   alt,
+  width,
+  height,
 }: {
   label: string;
   caption: string;
   filename: string;
-  wide?: boolean;
   alt: string;
+  width: number;
+  height: number;
 }) {
+  // Single-column layout — every screenshot renders at full page
+  // width in its natural aspect ratio, no crop. Inspired by the
+  // analyst-portfolio format where each visualisation gets the
+  // whole slide.
   return (
-    <figure className={wide ? "md:col-span-2" : ""}>
-      <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-stone-200/60 bg-[#0a0d12] shadow-[0_18px_48px_rgba(15,32,40,0.20)]">
+    <figure>
+      <div className="relative overflow-hidden rounded-2xl border border-stone-200/60 bg-[#0a0d12] shadow-[0_18px_48px_rgba(15,32,40,0.20)]">
         <span className="absolute left-4 top-4 z-10 rounded-full bg-white/15 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/90 backdrop-blur-sm">
           {label}
         </span>
         <Image
           src={`/case-studies/oikero/${filename}`}
           alt={alt}
-          fill
-          sizes={
-            wide
-              ? "(min-width: 768px) 1000px, 100vw"
-              : "(min-width: 768px) 500px, 100vw"
-          }
-          className="object-cover object-top"
+          width={width}
+          height={height}
+          sizes="(min-width: 768px) 1000px, 100vw"
+          className="block h-auto w-full"
         />
       </div>
-      <figcaption className="mt-2 text-[13px] leading-[1.55] text-stone-600">
+      <figcaption className="mt-3 text-[14px] leading-[1.6] text-stone-600">
         {caption}
       </figcaption>
     </figure>
@@ -640,13 +663,14 @@ function ImageSlot({
 function HeroDashboardSlot() {
   return (
     <figure>
-      <div className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-stone-200/60 bg-[#0a0d12] shadow-[0_24px_72px_rgba(15,32,40,0.25)]">
+      <div className="relative overflow-hidden rounded-3xl border border-stone-200/60 bg-[#0a0d12] shadow-[0_24px_72px_rgba(15,32,40,0.25)]">
         <Image
           src="/case-studies/oikero/investments.jpg"
           alt="Investments dashboard of the household operations platform — total value, daily change, valuation coverage, portfolio performance chart and period P/L."
-          fill
+          width={1292}
+          height={1440}
           sizes="(min-width: 768px) 1000px, 100vw"
-          className="object-cover object-top"
+          className="block h-auto w-full"
           priority
         />
       </div>
