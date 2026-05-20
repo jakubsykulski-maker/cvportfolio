@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+/*
+ * Portfolio visual direction — mirrors the "ambre" style of the
+ * French Learning App: warm cream background, deep stone text,
+ * one accent blue used sparingly, big sans display + serif body
+ * for warmth. Calm, premium, recruiter-readable.
+ */
+
+@theme {
+  --color-cream: #faf6ef;
+  --color-cream-deep: #f3ecdf;
+  --color-stone-ink: #1c1a16;
+  --color-accent: #5d6fff;
+  --color-accent-deep: #1a2f73;
+
+  --font-display: var(--font-sora), "Inter", system-ui, sans-serif;
+  --font-serif: var(--font-literata), "Iowan Old Style", Georgia, serif;
+}
+
+html,
+body {
+  background: var(--color-cream);
+  color: var(--color-stone-ink);
+  font-family: var(--font-serif);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-image: radial-gradient(
+      1200px 600px at 90% -10%,
+      rgba(93, 111, 255, 0.06),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 500px at -10% 110%,
+      rgba(239, 184, 74, 0.08),
+      transparent 60%
+    );
+  background-attachment: fixed;
+}
+
+/* Big display headings — slow shimmer on the hero only. */
+.shimmer {
+  background: linear-gradient(
+    100deg,
+    var(--color-accent-deep) 20%,
+    var(--color-accent) 50%,
+    var(--color-accent-deep) 80%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 8s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Subtle dotted grid for backdrop sections. */
+.grid-bg {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(28, 26, 22, 0.06) 1px,
+    transparent 0
+  );
+  background-size: 22px 22px;
+}

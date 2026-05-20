@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>OG image template — Jakub Sykulski portfolio</title>
+  <!--
+    Open Graph image generator.
+
+    Goal: when someone shares jakubsykulski.com on LinkedIn / Slack /
+    email, the link preview card needs to actually sell the click. A
+    grey rectangle (the default) means nobody clicks; this template
+    fills it.
+
+    How to use (manual, no tooling):
+
+      1. Open this file in Chrome:
+         file:///C:/Users/sykul/OneDrive/Dokumenty/cvportfolio/public/og.html
+      2. Open DevTools (F12), toggle device toolbar (Ctrl+Shift+M).
+      3. Set viewport to 1200 × 630 (custom size).
+      4. Reload — the layout sizes itself to fill the viewport exactly.
+      5. Right-click the page → "Capture full size screenshot" — or
+         use the DevTools 3-dot menu → Run command → "Capture full size
+         screenshot". Save the PNG as public/og.png next to this file.
+      6. The portfolio's `metadata.openGraph.images` in app/layout.tsx
+         already expects /og.png — just drop it in.
+
+    Edit the copy below by hand if you want a different hook. The
+    template is intentionally one file with no JS so it always renders
+    the same way regardless of build state.
+  -->
+  <style>
+    :root {
+      --cream: #faf6ef;
+      --cream-deep: #f3ecdf;
+      --ink: #1c1a16;
+      --accent: #5d6fff;
+      --accent-deep: #1a2f73;
+      --emerald: #0f5132;
+      --amber-warm: #efb84a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+      font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+      color: var(--ink);
+      background: var(--cream);
+    }
+
+    body {
+      position: relative;
+      padding: 60px 72px;
+      background-image:
+        radial-gradient(900px 500px at 100% -10%, rgba(93, 111, 255, 0.10), transparent 60%),
+        radial-gradient(700px 400px at -10% 110%, rgba(239, 184, 74, 0.14), transparent 60%);
+    }
+
+    .eyebrow {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #79716b;
+    }
+
+    h1 {
+      margin-top: 24px;
+      font-size: 92px;
+      font-weight: 800;
+      line-height: 0.97;
+      letter-spacing: -0.025em;
+      background: linear-gradient(
+        100deg,
+        var(--accent-deep) 20%,
+        var(--accent) 55%,
+        var(--accent-deep) 80%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .tagline {
+      margin-top: 24px;
+      font-size: 26px;
+      font-weight: 500;
+      line-height: 1.45;
+      color: #44403c;
+      max-width: 860px;
+    }
+
+    .footer {
+      position: absolute;
+      left: 72px;
+      right: 72px;
+      bottom: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .name {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .name span {
+      font-weight: 400;
+      color: #79716b;
+      margin-left: 12px;
+    }
+
+    .url {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--accent-deep);
+      letter-spacing: -0.005em;
+    }
+
+    .tags {
+      position: absolute;
+      top: 72px;
+      right: 72px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+
+    .tag {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(28, 26, 22, 0.10);
+      color: var(--accent-deep);
+    }
+
+    .tag.emerald {
+      color: var(--emerald);
+      border-color: rgba(15, 81, 50, 0.20);
+    }
+  </style>
+</head>
+<body>
+  <div class="eyebrow">Portfolio · Jakub Sykulski</div>
+
+  <h1>
+    AI-assisted<br>
+    product prototyping.
+  </h1>
+
+  <p class="tagline">
+    Two shipped instances of one pattern — messy input becomes
+    structured, validated data. A household ops platform with
+    AI-assisted insurance claim intake, and an AI scanner that turns
+    handwritten classroom notes into revision cards.
+  </p>
+
+  <div class="tags">
+    <span class="tag">Operations · Analytics</span>
+    <span class="tag emerald">Insurance · Wealth · Health</span>
+    <span class="tag">Document AI</span>
+  </div>
+
+  <div class="footer">
+    <div class="name">Jakub Sykulski <span>· Nyon, Switzerland</span></div>
+    <div class="url">jakubsykulski.com</div>
+  </div>
+</body>
+</html>
