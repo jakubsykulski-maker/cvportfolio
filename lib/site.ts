@@ -8,7 +8,7 @@
 
 export const site = {
   name: "Jakub Sykulski",
-  title: "Operations & Analytics · AI-assisted product prototyping",
+  title: "Operations, Analytics & AI-augmented tooling",
   location: "Nyon · Geneva area, Switzerland",
   languages: "EN proficient · FR intermediate · PL native",
 
@@ -22,12 +22,16 @@ export const site = {
   github: "https://github.com/jakubsykulski-maker",
   linkedin: "https://www.linkedin.com/in/jakubsykulski/",
 
+  // Public canonical URL. When you wire the custom domain in Vercel,
+  // update this; the og.html title and demoMailto pick it up.
+  url: "https://jakubsykulski.com",
+
   // Used by mailto buttons. Stable subject = recruiter filter friendly.
   demoMailto: (caseStudy: string) =>
     `mailto:jakub.sykulski@gmail.com?subject=${encodeURIComponent(
       `Demo access — ${caseStudy}`,
     )}&body=${encodeURIComponent(
-      "Hi Jakub,\n\nI saw your case study at https://...\n\nI'd like to see a live demo. Could you share access?\n\nThanks,\n",
+      "Hi Jakub,\n\nI saw your case study at https://jakubsykulski.com\n\nI'd like to see a live demo. Could you share access?\n\nThanks,\n",
     )}`,
 };
 

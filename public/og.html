@@ -30,13 +30,15 @@
   -->
   <style>
     :root {
-      --cream: #faf6ef;
-      --cream-deep: #f3ecdf;
-      --ink: #1c1a16;
-      --accent: #5d6fff;
-      --accent-deep: #1a2f73;
-      --emerald: #0f5132;
-      --amber-warm: #efb84a;
+      --paper: #fbf8f1;
+      --paper-deep: #efe7d8;
+      --ink: #161616;
+      --muted: #645f58;
+      --blue: #172f8a;
+      --blue-bright: #4257ff;
+      --green: #0d5c3f;
+      --amber: #c06a1b;
+      --line: rgba(22, 22, 22, 0.12);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -47,40 +49,76 @@
       overflow: hidden;
       font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
       color: var(--ink);
-      background: var(--cream);
+      background: var(--paper);
     }
 
     body {
       position: relative;
-      padding: 60px 72px;
+      display: grid;
+      grid-template-columns: 1fr 382px;
+      gap: 58px;
+      padding: 54px 70px 42px;
       background-image:
-        radial-gradient(900px 500px at 100% -10%, rgba(93, 111, 255, 0.10), transparent 60%),
-        radial-gradient(700px 400px at -10% 110%, rgba(239, 184, 74, 0.14), transparent 60%);
+        linear-gradient(115deg, rgba(66, 87, 255, 0.10) 0%, transparent 38%),
+        linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%);
+    }
+
+    body::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(22, 22, 22, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(22, 22, 22, 0.045) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(90deg, transparent 0%, black 18%, black 72%, transparent 100%);
+      opacity: 0.55;
+    }
+
+    main,
+    aside,
+    .footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    main {
+      min-width: 0;
     }
 
     .eyebrow {
-      font-size: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
       font-weight: 800;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: #79716b;
+      color: var(--muted);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 42px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--blue-bright);
     }
 
     h1 {
-      margin-top: 24px;
-      font-size: 92px;
+      margin-top: 22px;
+      max-width: 720px;
+      font-size: 74px;
       font-weight: 800;
-      /* Looser leading + descender padding so y / g / p don't get
-         clipped by the gradient bounding-box (WebKit quirk on
-         background-clip: text). */
-      line-height: 1.08;
-      padding-bottom: 12px;
-      letter-spacing: -0.025em;
+      line-height: 0.99;
+      letter-spacing: -0.035em;
       background: linear-gradient(
-        100deg,
-        var(--accent-deep) 20%,
-        var(--accent) 55%,
-        var(--accent-deep) 80%
+        105deg,
+        var(--ink) 0%,
+        var(--blue) 42%,
+        var(--blue-bright) 72%,
+        var(--blue) 100%
       );
       -webkit-background-clip: text;
       background-clip: text;
@@ -88,115 +126,189 @@
     }
 
     .tagline {
+      margin-top: 22px;
+      max-width: 685px;
+      font-size: 23px;
+      font-weight: 520;
+      line-height: 1.36;
+      color: #2e2b27;
+    }
+
+    .proof {
       margin-top: 24px;
-      font-size: 26px;
-      font-weight: 500;
-      line-height: 1.45;
-      color: #44403c;
-      max-width: 860px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .proof span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 8px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.64);
+      color: #302d28;
+      font-size: 13px;
+      font-weight: 780;
+      letter-spacing: 0.035em;
+      text-transform: uppercase;
+    }
+
+    aside {
+      align-self: stretch;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 18px;
+      padding-top: 12px;
+    }
+
+    .aside-title {
+      font-size: 16px;
+      font-weight: 850;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    .case-list {
+      display: grid;
+      align-content: start;
+      gap: 14px;
+    }
+
+    .case {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 21px 22px;
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: 0 16px 38px rgba(27, 24, 19, 0.07);
+    }
+
+    .case strong {
+      display: block;
+      font-size: 22px;
+      line-height: 1.16;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .case p {
+      margin-top: 12px;
+      font-size: 16px;
+      line-height: 1.35;
+      color: var(--muted);
+    }
+
+    .case.emerald {
+      border-top: 6px solid var(--green);
+    }
+
+    .case.blue {
+      border-top: 6px solid var(--blue-bright);
+    }
+
+    .signal {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .signal span {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(23, 47, 138, 0.08);
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 820;
+      letter-spacing: 0.055em;
+      text-transform: uppercase;
     }
 
     .footer {
       position: absolute;
-      left: 72px;
-      right: 72px;
-      bottom: 60px;
+      left: 70px;
+      right: 70px;
+      bottom: 34px;
       display: flex;
-      align-items: center;
+      align-items: end;
       justify-content: space-between;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
     }
 
     .name {
       font-size: 22px;
-      font-weight: 700;
+      font-weight: 820;
       color: var(--ink);
     }
 
     .name span {
-      font-weight: 400;
-      color: #79716b;
-      margin-left: 12px;
-    }
-
-    .cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 22px;
-      border-radius: 12px;
-      background: var(--accent-deep);
-      color: white;
-      font-size: 20px;
-      font-weight: 600;
-      letter-spacing: -0.005em;
-      box-shadow: 0 8px 24px rgba(26, 47, 115, 0.25);
-    }
-
-    .cta::after {
-      content: "→";
-      font-size: 22px;
-      line-height: 1;
+      display: block;
+      margin-top: 6px;
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--muted);
     }
 
     .url {
-      font-size: 22px;
-      font-weight: 600;
-      color: var(--accent-deep);
-      letter-spacing: -0.005em;
-    }
-
-    .tags {
-      position: absolute;
-      top: 72px;
-      right: 72px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 10px;
-    }
-
-    .tag {
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 6px 14px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(28, 26, 22, 0.10);
-      color: var(--accent-deep);
-    }
-
-    .tag.emerald {
-      color: var(--emerald);
-      border-color: rgba(15, 81, 50, 0.20);
+      color: var(--blue);
+      font-size: 24px;
+      font-weight: 820;
+      letter-spacing: -0.02em;
     }
   </style>
 </head>
 <body>
-  <div class="eyebrow">Portfolio · Jakub Sykulski</div>
+  <main>
+    <div class="eyebrow">Portfolio · Jakub Sykulski</div>
 
-  <h1>
-    AI-assisted<br>
-    product prototyping.
-  </h1>
+    <h1>
+      Operations,<br>
+      Analytics &amp;<br>
+      AI tooling.
+    </h1>
 
-  <p class="tagline">
-    Two shipped instances of one pattern — messy input becomes
-    structured, validated data. A household ops platform with
-    AI-assisted insurance claim intake, and an AI scanner that turns
-    handwritten classroom notes into revision cards.
-  </p>
+    <p class="tagline">
+      8+ years across BIS, Stuart (DPD Group) and FlixBus.
+      Now building AI-assisted internal tools that turn messy input
+      into structured, validated, auditable data.
+    </p>
 
-  <div class="tags">
-    <span class="tag">Operations · Analytics</span>
-    <span class="tag emerald">Insurance · Wealth · Health</span>
-    <span class="tag">Document AI</span>
-  </div>
+    <div class="proof">
+      <span>Data + BI</span>
+      <span>Operations systems</span>
+      <span>AI prototypes</span>
+    </div>
+  </main>
+
+  <aside>
+    <div class="aside-title">Case studies inside</div>
+
+    <div class="case-list">
+      <section class="case emerald">
+        <strong>Household operations platform</strong>
+        <p>Investments, insurance, budget, lab results and plants with AI-assisted claim intake.</p>
+      </section>
+
+      <section class="case blue">
+        <strong>French AI learning app</strong>
+        <p>Photos of handwritten classroom notes become vocabulary cards and revision material.</p>
+      </section>
+    </div>
+
+    <div class="signal">
+      <span>Gemini</span>
+      <span>Audit trail</span>
+      <span>Human review</span>
+      <span>Response schema</span>
+    </div>
+  </aside>
 
   <div class="footer">
-    <div class="name">Jakub Sykulski <span>· Nyon, Switzerland</span></div>
-    <span class="cta">View case studies</span>
+    <div class="name">Jakub Sykulski <span>Nyon · Geneva area, Switzerland</span></div>
+    <div class="url">jakubsykulski.com</div>
   </div>
 </body>
 </html>

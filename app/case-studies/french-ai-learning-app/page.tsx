@@ -93,17 +93,11 @@ export default function CaseStudy() {
           </a>
         </div>
 
-        {/* Before / After visual — the whole pitch in one image pair. */}
-        <div className="mt-12 grid grid-cols-1 items-start gap-6 md:grid-cols-2">
-          <BeforeAfterSlot
-            kind="before"
-            caption="A page of handwritten French class notes — what the learner brings in."
-          />
-          <BeforeAfterSlot
-            kind="after"
-            caption="A structured vocabulary card — what the app returns, ready for revision."
-          />
-        </div>
+        {/* Phone-recorded demo: the actual lifecycle — handwritten
+            page on the desk, photo taken in-app, scan-card returned.
+            Autoplays muted on loop; mobile recruiters see motion
+            within the first viewport. */}
+        <DemoVideo />
       </header>
 
       <ProjectMeta
@@ -148,6 +142,21 @@ export default function CaseStudy() {
           <WorkflowStep n={4} icon={<BookOpenCheck className="h-5 w-5" />} label="Stored card" sub="Searchable, shareable" />
           <WorkflowStep n={5} icon={<Printer className="h-5 w-5" />} label="Revise / print" sub="Spaced repetition ready" />
         </ol>
+      </Section>
+
+      {/* ── Before / After — static proof for skimmers who can't or
+           won't play the hero video. Same notes, same morning. */}
+      <Section eyebrow="The same notes, the same morning" title="Before / after">
+        <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2">
+          <BeforeAfterSlot
+            kind="before"
+            caption="A page of handwritten French class notes — what the learner brings in."
+          />
+          <BeforeAfterSlot
+            kind="after"
+            caption="A structured vocabulary card — what the app returns, ready for revision."
+          />
+        </div>
       </Section>
 
       {/* ── Product tour ─────────────────────────────────────────── */}
@@ -492,6 +501,37 @@ function ImageSlot({
       </div>
       <figcaption className="mt-2 text-[13px] leading-[1.55] text-stone-600">
         {caption}
+      </figcaption>
+    </figure>
+  );
+}
+
+/**
+ * Phone-recorded lifecycle demo — autoplays muted on loop so a
+ * recruiter sees motion within the first viewport, on phone or
+ * desktop. `playsInline` is required for iOS Safari autoplay to
+ * work without forcing fullscreen. Native aspect ratio preserved
+ * by the video element itself, capped to a phone-sized max-width
+ * for portrait recordings; adjust max-w if the source is landscape.
+ */
+function DemoVideo() {
+  return (
+    <figure className="mt-12">
+      <div className="mx-auto max-w-md overflow-hidden rounded-[2.25rem] border border-stone-200/70 bg-stone-900 shadow-[0_30px_80px_rgba(28,26,22,0.18)]">
+        <video
+          src="/case-studies/french-ai/demo-mobile.mp4"
+          className="block h-auto w-full"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-label="Phone recording of the full scan-to-card lifecycle — photographing handwritten classroom notes and receiving a structured vocabulary card from the AI scanner."
+        />
+      </div>
+      <figcaption className="mt-3 text-center text-[14px] leading-[1.55] text-stone-600">
+        60-second phone recording — handwritten page, photo, AI scan, card.
+        Real time, no cuts.
       </figcaption>
     </figure>
   );
