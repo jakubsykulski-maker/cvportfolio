@@ -70,7 +70,11 @@
       margin-top: 24px;
       font-size: 92px;
       font-weight: 800;
-      line-height: 0.97;
+      /* Looser leading + descender padding so y / g / p don't get
+         clipped by the gradient bounding-box (WebKit quirk on
+         background-clip: text). */
+      line-height: 1.08;
+      padding-bottom: 12px;
       letter-spacing: -0.025em;
       background: linear-gradient(
         100deg,

@@ -182,10 +182,6 @@ export default function CaseStudy() {
             body="Free-text JSON output drifts: keys disappear, types change. Forcing Gemini through a strict schema kills that whole class of bugs and acts as a second line of defence against prompt injection (the model can't easily exfiltrate fields that aren't in the schema)."
           />
           <DecisionCard
-            title="Dropped the Italian rollout"
-            body="Mid-build I added Italian as a second learning language. After Wave A it became clear the cost (locked tenancy, native AI prompts per language, admin tooling) outweighed the value for ~10 real users. I reverted the code, kept the planning docs as a future option, and re-focused on French quality. Knowing when to cut is a feature."
-          />
-          <DecisionCard
             title="Typed content blocks, not MDX"
             body="Course content lives as typed JSON blocks (heading, paragraph, vocab, example, quiz) — not freeform Markdown. Editors stay safe, admin UI can render previews, and the same blocks render to mobile, print, and revision in three styles."
           />
@@ -299,7 +295,7 @@ export default function CaseStudy() {
             "Wrote the prompt architecture, including the security directive and per-focus extraction strategy.",
             "Directed and reviewed AI-assisted code generation across frontend, backend and SQL.",
             "Tested, iterated and shipped through real classroom use with my own French course.",
-            "Made the calls on what to drop — the Italian rollout being the clearest example.",
+            "Made the calls on what to drop — half-built scope is tax on every future change.",
           ].map((line) => (
             <li key={line} className="relative pl-5">
               <span className="absolute left-0 top-[0.7em] h-1.5 w-1.5 rounded-full bg-stone-400" />

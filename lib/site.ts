@@ -73,7 +73,7 @@ export const experience = [
       "Working a single pattern across two shipped prototypes: messy input → structured, validated data via Gemini with response_schema, persisted with audit trail and human review.",
       "Oikero — modular household operations platform (investments, insurance claims, budget, lab results, plants) with AI-assisted claim document intake (Gemini 2.5 Flash → Pydantic-validated claim fields). Event-sourced investments, immutable audit log, household-scoped Row Level Security as defence-in-depth.",
       "French Learning App — photo of handwritten classroom notes → structured vocabulary cards with multi-focus extraction (vocab, grammar, conjugation, translation), print-ready revision output. Three-layer defence against prompt injection.",
-      "Across both: defined the data model and prompt architecture, made the cuts (Italian rollout dropped after Wave A), and accelerated implementation with Cursor, Claude Code and Codex.",
+      "Across both: defined the data model, designed the prompt architecture, made the product cuts, and accelerated implementation with Cursor, Claude Code and Codex.",
     ],
   },
   {
@@ -139,7 +139,7 @@ export const principles = [
   },
   {
     title: "Cut features when cost-to-value drops.",
-    body: "The Italian rollout was reverted after one wave when the upside stopped justifying the surface. The planning docs stayed; the code went. Knowing when to cut is a feature.",
+    body: "Half-built features are tax on every future change. When the upside stops justifying the surface, I revert the code and keep the planning notes. Knowing when to cut is a feature.",
   },
   {
     title: "Structured data over freeform.",

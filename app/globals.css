@@ -41,7 +41,14 @@ body {
   background-attachment: fixed;
 }
 
-/* Big display headings — slow shimmer on the hero only. */
+/* Big display headings — slow shimmer on the hero only.
+ *
+ * `padding-bottom` + `line-height` tweak: WebKit clips the gradient
+ * bounding-box to the font's ascent/descent metrics, so descenders
+ * (y / g / p / q) get their bottom pixels chopped on tight leading.
+ * Extra space below + slightly looser leading restore the descenders
+ * without changing perceived heading height much.
+ */
 .shimmer {
   background: linear-gradient(
     100deg,
@@ -53,6 +60,8 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  line-height: 1.05;
+  padding-bottom: 0.12em;
   animation: shimmer 8s ease-in-out infinite;
 }
 
