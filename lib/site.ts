@@ -43,6 +43,13 @@ export type CaseStudy = {
   status: "Private · in daily use" | "Private · in progress" | "Concept";
   href: string;
   accent: "blue" | "amber" | "emerald";
+  /** Thumbnail rendered inside the card on the index page. Must be a
+   *  static asset under /public. Aspect ~16/10 works best — the card
+   *  crops top-left so the screenshot's header stays visible. */
+  thumbnail: { src: string; alt: string; width: number; height: number };
+  /** Short, scannable chips of concrete facts. Recruiters skim these
+   *  in 2 s; longer copy lives inside the case study itself. */
+  stats: string[];
 };
 
 export const caseStudies: CaseStudy[] = [
@@ -55,6 +62,18 @@ export const caseStudies: CaseStudy[] = [
     status: "Private · in daily use",
     href: "/case-studies/household-ops-platform",
     accent: "emerald",
+    thumbnail: {
+      src: "/case-studies/oikero/investments.jpg",
+      alt: "Dark-mode investments dashboard with portfolio metrics and performance chart.",
+      width: 1292,
+      height: 1440,
+    },
+    stats: [
+      "5 modules",
+      "AI claim extraction",
+      "Event-sourced portfolio",
+      "Arduino-ready",
+    ],
   },
   {
     slug: "french-ai-learning-app",
@@ -65,6 +84,18 @@ export const caseStudies: CaseStudy[] = [
     status: "Private · in daily use",
     href: "/case-studies/french-ai-learning-app",
     accent: "blue",
+    thumbnail: {
+      src: "/case-studies/french-ai/card-after.jpg",
+      alt: "Generated vocabulary card showing 14 French entries with definitions and English translations.",
+      width: 1302,
+      height: 1236,
+    },
+    stats: [
+      "Multi-focus extraction",
+      "3-layer injection defence",
+      "60-second lifecycle",
+      "~10 classmate users",
+    ],
   },
 ];
 

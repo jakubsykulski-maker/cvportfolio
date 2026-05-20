@@ -123,39 +123,96 @@ export default function Home() {
 
       {/* ── Case studies (the proof) ──────────────────────────────── */}
       <Section eyebrow="Selected work" title="Case studies">
-        <ul className="grid grid-cols-1 gap-5 md:grid-cols-2">
-          {caseStudies.map((cs) => (
-            <li key={cs.slug}>
-              <Link
-                href={cs.href}
-                className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-stone-200/80 bg-gradient-to-br from-[#5d6fff]/[0.10] via-white/60 to-white/40 p-7 shadow-[0_18px_48px_rgba(39,27,11,0.08)] transition hover:-translate-y-0.5 hover:shadow-[0_24px_56px_rgba(39,27,11,0.12)]"
-              >
-                <div>
-                  <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#1a2f73]/70">
-                    {cs.domain}
-                  </p>
-                  <h3
-                    className="mt-2 text-2xl font-semibold tracking-tight text-stone-900"
-                    style={{ fontFamily: "var(--font-display)" }}
+        <p className="-mt-2 max-w-2xl text-[15px] leading-[1.65] text-stone-600">
+          Two private AI-assisted prototypes around the same pattern —
+          messy input becomes structured, validated data. Click either
+          card for the full architecture, decisions and screenshots.
+        </p>
+        <ul className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+          {caseStudies.map((cs) => {
+            const isEmerald = cs.accent === "emerald";
+            return (
+              <li key={cs.slug}>
+                <Link
+                  href={cs.href}
+                  className={`group relative flex h-full flex-col overflow-hidden rounded-3xl border border-stone-200/80 bg-white shadow-[0_18px_48px_rgba(39,27,11,0.08)] transition hover:-translate-y-1 hover:shadow-[0_28px_64px_rgba(39,27,11,0.14)] ${
+                    isEmerald ? "hover:border-emerald-400/40" : "hover:border-[#5d6fff]/40"
+                  }`}
+                  aria-label={`Read the ${cs.title} case study`}
+                >
+                  {/* Thumbnail — the visual hook. Aspect-locked so
+                      cards align in the grid regardless of source. */}
+                  <div
+                    className={`relative aspect-[16/10] overflow-hidden ${
+                      isEmerald ? "bg-[#0a0d12]" : "bg-[#f3ecdf]"
+                    }`}
                   >
-                    {cs.title}
-                  </h3>
-                  <p className="mt-2 text-[15px] leading-[1.65] text-stone-700">
-                    {cs.oneLiner}
-                  </p>
-                </div>
-                <div className="mt-6 flex items-center justify-between">
-                  <span className="inline-flex items-center rounded-full bg-emerald-500/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-emerald-800">
-                    {cs.status}
-                  </span>
-                  <span className="inline-flex items-center gap-1 text-sm font-medium text-[#1a2f73] transition group-hover:gap-2">
-                    Read case study
-                    <ArrowUpRight className="h-4 w-4" />
-                  </span>
-                </div>
-              </Link>
-            </li>
-          ))}
+                    <Image
+                      src={cs.thumbnail.src}
+                      alt={cs.thumbnail.alt}
+                      width={cs.thumbnail.width}
+                      height={cs.thumbnail.height}
+                      sizes="(min-width: 768px) 500px, 100vw"
+                      className="absolute inset-0 h-full w-full object-cover object-top transition duration-500 group-hover:scale-[1.03]"
+                    />
+                    <span
+                      className={`absolute left-4 top-4 inline-flex items-center rounded-full px-2.5 py-1 text-[10.5px] font-bold uppercase tracking-[0.14em] backdrop-blur-sm ${
+                        isEmerald
+                          ? "bg-white/15 text-white/95"
+                          : "bg-white/85 text-stone-700"
+                      }`}
+                    >
+                      {cs.status}
+                    </span>
+                  </div>
+
+                  {/* Body */}
+                  <div className="flex flex-1 flex-col p-7">
+                    <p
+                      className={`text-[11px] font-bold uppercase tracking-[0.12em] ${
+                        isEmerald ? "text-emerald-800/80" : "text-[#1a2f73]/70"
+                      }`}
+                    >
+                      {cs.domain}
+                    </p>
+                    <h3
+                      className="mt-2 text-2xl font-semibold tracking-tight text-stone-900"
+                      style={{ fontFamily: "var(--font-display)" }}
+                    >
+                      {cs.title}
+                    </h3>
+                    <p className="mt-3 text-[15px] leading-[1.65] text-stone-700">
+                      {cs.oneLiner}
+                    </p>
+
+                    {/* Stat chips — concrete facts, scannable */}
+                    <ul className="mt-4 flex flex-wrap gap-1.5">
+                      {cs.stats.map((s) => (
+                        <li
+                          key={s}
+                          className="rounded-full border border-stone-200 bg-stone-50 px-2.5 py-1 text-[11.5px] font-medium text-stone-600"
+                        >
+                          {s}
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* Prominent CTA — pushes to bottom of card */}
+                    <span
+                      className={`mt-6 inline-flex w-fit items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition group-hover:gap-3 ${
+                        isEmerald
+                          ? "bg-emerald-700 group-hover:bg-emerald-800"
+                          : "bg-[#1a2f73] group-hover:bg-[#13245a]"
+                      }`}
+                    >
+                      Read case study
+                      <ArrowUpRight className="h-4 w-4" />
+                    </span>
+                  </div>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </Section>
 
