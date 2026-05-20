@@ -119,7 +119,11 @@ export const experience = [
  * `month` string when you cycle.
  */
 export const now = {
-  month: "November 2026",
+  // Update this manually each month. Auto-dating tempts you to write
+  // evergreen bullets, which is exactly the opposite of what this
+  // section is for — recruiters want to know what's on your screen
+  // *this month*. Force the cycle.
+  month: "May 2026",
   bullets: [
     "Iterating on a household operations platform (Oikero) — five modules in daily use, AI-assisted insurance claim intake working end-to-end for two household members.",
     "Hardening the French learning app — multi-focus scan reliability, partial-success UX, public sanitized architecture docs.",

@@ -486,10 +486,10 @@ function ImageSlot({
 }) {
   return (
     <figure className={wide ? "md:col-span-2" : ""}>
-      <div className="relative overflow-hidden rounded-2xl border border-stone-200/80 bg-[#f3ecdf]/40">
-        <span className="absolute left-4 top-4 z-10 rounded-full bg-white/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-stone-600 shadow-sm">
-          {label}
-        </span>
+      <span className="inline-flex rounded-full border border-stone-300/70 bg-white/70 px-3 py-1 text-[10.5px] font-bold uppercase tracking-[0.18em] text-stone-600">
+        {label}
+      </span>
+      <div className="relative mt-3 overflow-hidden rounded-2xl border border-stone-200/80 bg-[#f3ecdf]/40">
         <Image
           src={`/case-studies/french-ai/${filename}`}
           alt={alt}
@@ -499,7 +499,7 @@ function ImageSlot({
           className="block h-auto w-full"
         />
       </div>
-      <figcaption className="mt-2 text-[13px] leading-[1.55] text-stone-600">
+      <figcaption className="mt-3 text-[14px] leading-[1.55] text-stone-600">
         {caption}
       </figcaption>
     </figure>
@@ -571,12 +571,12 @@ function BeforeAfterSlot({
       : "border-[#5d6fff]/30 bg-gradient-to-br from-[#5d6fff]/[0.06] via-white/40 to-white/40";
   return (
     <figure>
+      <span className="inline-flex rounded-full border border-stone-300/70 bg-white/70 px-3 py-1 text-[10.5px] font-bold uppercase tracking-[0.18em] text-stone-600">
+        {label}
+      </span>
       <div
-        className={`relative overflow-hidden rounded-3xl border ${ringColor}`}
+        className={`relative mt-3 overflow-hidden rounded-3xl border ${ringColor}`}
       >
-        <span className="absolute left-4 top-4 z-10 rounded-full bg-white/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-stone-600 shadow-sm">
-          {label}
-        </span>
         <Image
           src={`/case-studies/french-ai/${filename}`}
           alt={alt}

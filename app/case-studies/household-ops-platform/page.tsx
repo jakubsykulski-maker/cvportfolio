@@ -637,13 +637,14 @@ function ImageSlot({
   // Single-column layout — every screenshot renders at full page
   // width in its natural aspect ratio, no crop. Inspired by the
   // analyst-portfolio format where each visualisation gets the
-  // whole slide.
+  // whole slide. Label is rendered above the image (not overlaid)
+  // so it never collides with the screenshot's own header text.
   return (
     <figure>
-      <div className="relative overflow-hidden rounded-2xl border border-stone-200/60 bg-[#0a0d12] shadow-[0_18px_48px_rgba(15,32,40,0.20)]">
-        <span className="absolute left-4 top-4 z-10 rounded-full bg-white/15 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/90 backdrop-blur-sm">
-          {label}
-        </span>
+      <span className="inline-flex rounded-full border border-stone-300/70 bg-white/70 px-3 py-1 text-[10.5px] font-bold uppercase tracking-[0.18em] text-stone-600">
+        {label}
+      </span>
+      <div className="relative mt-3 overflow-hidden rounded-2xl border border-stone-200/60 bg-[#0a0d12] shadow-[0_18px_48px_rgba(15,32,40,0.20)]">
         <Image
           src={`/case-studies/oikero/${filename}`}
           alt={alt}
