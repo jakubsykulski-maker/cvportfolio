@@ -35,16 +35,10 @@ export default function Home() {
           <p className="text-[0.78rem] font-bold uppercase tracking-[0.14em] text-stone-500">
             Portfolio · {new Date().getFullYear()}
           </p>
-          <h1
-            className="shimmer mt-4 text-[clamp(2.75rem,8vw,5rem)] font-extrabold leading-[0.95] tracking-tight"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
+          <h1 className="shimmer mt-4 font-display text-[clamp(2.75rem,8vw,5rem)] font-extrabold leading-[0.95] tracking-tight">
             {site.name}
           </h1>
-          <p
-            className="mt-4 max-w-2xl text-xl font-medium text-stone-700 md:text-2xl"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
+          <p className="mt-4 max-w-2xl font-display text-xl font-medium text-stone-700 md:text-2xl">
             {site.title}.
           </p>
         </div>
@@ -136,7 +130,7 @@ export default function Home() {
                 <Link
                   href={cs.href}
                   className={`group relative flex h-full flex-col overflow-hidden rounded-3xl border border-stone-200/80 bg-white shadow-[0_18px_48px_rgba(39,27,11,0.08)] transition hover:-translate-y-1 hover:shadow-[0_28px_64px_rgba(39,27,11,0.14)] ${
-                    isEmerald ? "hover:border-emerald-400/40" : "hover:border-[#5d6fff]/40"
+                    isEmerald ? "hover:border-emerald-400/40" : "hover:border-accent/40"
                   }`}
                   aria-label={`Read the ${cs.title} case study`}
                 >
@@ -144,7 +138,7 @@ export default function Home() {
                       cards align in the grid regardless of source. */}
                   <div
                     className={`relative aspect-[16/10] overflow-hidden ${
-                      isEmerald ? "bg-[#0a0d12]" : "bg-[#f3ecdf]"
+                      isEmerald ? "bg-screen-dark" : "bg-cream-deep"
                     }`}
                   >
                     <Image
@@ -170,15 +164,12 @@ export default function Home() {
                   <div className="flex flex-1 flex-col p-7">
                     <p
                       className={`text-[11px] font-bold uppercase tracking-[0.12em] ${
-                        isEmerald ? "text-emerald-800/80" : "text-[#1a2f73]/70"
+                        isEmerald ? "text-emerald-800/80" : "text-accent-deep/70"
                       }`}
                     >
                       {cs.domain}
                     </p>
-                    <h3
-                      className="mt-2 text-2xl font-semibold tracking-tight text-stone-900"
-                      style={{ fontFamily: "var(--font-display)" }}
-                    >
+                    <h3 className="mt-2 font-display text-2xl font-semibold tracking-tight text-stone-900">
                       {cs.title}
                     </h3>
                     <p className="mt-3 text-[15px] leading-[1.65] text-stone-700">
@@ -202,7 +193,7 @@ export default function Home() {
                       className={`mt-6 inline-flex w-fit items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition group-hover:gap-3 ${
                         isEmerald
                           ? "bg-emerald-700 group-hover:bg-emerald-800"
-                          : "bg-[#1a2f73] group-hover:bg-[#13245a]"
+                          : "bg-accent-deep group-hover:bg-accent-darker"
                       }`}
                     >
                       Read case study
@@ -224,10 +215,7 @@ export default function Home() {
           {experience.map((job) => (
             <li key={`${job.org}-${job.period}`} className="grid gap-2 md:grid-cols-[1fr_2fr] md:gap-10">
               <div>
-                <p
-                  className="text-lg font-semibold text-stone-900"
-                  style={{ fontFamily: "var(--font-display)" }}
-                >
+                <p className="font-display text-lg font-semibold text-stone-900">
                   {job.role}
                 </p>
                 <p className="text-sm text-stone-600">{job.org}</p>
@@ -310,10 +298,7 @@ export default function Home() {
               <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-stone-400">
                 0{i + 1}
               </p>
-              <p
-                className="mt-2 text-lg font-semibold text-stone-900"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
+              <p className="mt-2 font-display text-lg font-semibold text-stone-900">
                 {p.title}
               </p>
               <p className="mt-2 text-[15px] leading-[1.7] text-stone-700">

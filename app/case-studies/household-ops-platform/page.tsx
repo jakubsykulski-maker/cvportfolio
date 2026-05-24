@@ -8,10 +8,8 @@
  * pipeline; the engineering angle is the multi-module architecture
  * (event sourcing, immutable audit log, RLS, household-scoped auth).
  *
- * SCREENSHOT PLACEHOLDERS — every `<ImageSlot>` marks a spot where
- * a real .png from /public/case-studies/oikero/ should be dropped.
- * Files needed: home.png, investments.png, claim-detail.png (the
- * AI showcase), budget.png, lab-result.png, plants.png.
+ * Shared building blocks (cards, steps, stack box, screenshot slot)
+ * live in components/case-study.tsx — keep new ones there too.
  */
 
 import type { Metadata } from "next";
@@ -40,6 +38,14 @@ import {
 import { Hairline, Section } from "@/components/section";
 import { CopyButton } from "@/components/copy-button";
 import { ProjectMeta } from "@/components/project-meta";
+import {
+  IconCard,
+  ImageSlot,
+  ModuleCard,
+  NumberedStep,
+  StackBox,
+  TitleBodyCard,
+} from "@/components/case-study";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -69,10 +75,7 @@ export default function CaseStudy() {
         <p className="text-[0.78rem] font-bold uppercase tracking-[0.14em] text-stone-500">
           Case study · Insurance · Wealth · Health · Document AI
         </p>
-        <h1
-          className="shimmer mt-4 text-[clamp(2.25rem,6.5vw,4.25rem)] font-extrabold leading-[1.05] tracking-tight"
-          style={{ fontFamily: "var(--font-display)" }}
-        >
+        <h1 className="shimmer mt-4 font-display text-[clamp(2.25rem,6.5vw,4.25rem)] font-extrabold leading-[1.05] tracking-tight">
           A household operations platform
           <br />
           with AI-assisted claim intake.
@@ -89,7 +92,7 @@ export default function CaseStudy() {
         <div className="mt-6 flex flex-wrap gap-3">
           <a
             href={site.demoMailto("Household operations platform (Oikero)")}
-            className="inline-flex items-center gap-2 rounded-xl bg-[#0f5132] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0a3d24]"
+            className="inline-flex items-center gap-2 rounded-xl bg-emerald-ink px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-ink-deep"
           >
             <Mail className="h-4 w-4" />
             Request demo access
@@ -102,8 +105,8 @@ export default function CaseStudy() {
           </a>
         </div>
 
-        {/* Hero visual: the home dashboard screenshot tells the whole
-            breadth story in one glance — five modules at once. */}
+        {/* Hero visual: the investments dashboard tells the breadth
+            story in one glance — five modules at once. */}
         <div className="mt-12">
           <HeroDashboardSlot />
         </div>
@@ -207,28 +210,28 @@ export default function CaseStudy() {
         </p>
 
         <ol className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-6">
-          <PipelineStep n={1} icon={<Upload className="h-5 w-5" />} label="Upload" sub="PDF / JPEG / PNG, ≤ 10 MB" />
-          <PipelineStep n={2} icon={<Lock className="h-5 w-5" />} label="Validate" sub="MIME + size + rate limit" />
-          <PipelineStep n={3} icon={<Sparkles className="h-5 w-5" />} label="Gemini 2.5 Flash" sub="Multimodal, T = 0.1" />
-          <PipelineStep n={4} icon={<FileText className="h-5 w-5" />} label="response_schema" sub="Structured JSON only" />
-          <PipelineStep n={5} icon={<Eye className="h-5 w-5" />} label="Human review" sub="Prefilled, never auto" />
-          <PipelineStep n={6} icon={<CheckCircle2 className="h-5 w-5" />} label="Claim record" sub="With audit trail" />
+          <NumberedStep n={1} icon={<Upload className="h-5 w-5" />} label="Upload" sub="PDF / JPEG / PNG, ≤ 10 MB" />
+          <NumberedStep n={2} icon={<Lock className="h-5 w-5" />} label="Validate" sub="MIME + size + rate limit" />
+          <NumberedStep n={3} icon={<Sparkles className="h-5 w-5" />} label="Gemini 2.5 Flash" sub="Multimodal, T = 0.1" />
+          <NumberedStep n={4} icon={<FileText className="h-5 w-5" />} label="response_schema" sub="Structured JSON only" />
+          <NumberedStep n={5} icon={<Eye className="h-5 w-5" />} label="Human review" sub="Prefilled, never auto" />
+          <NumberedStep n={6} icon={<CheckCircle2 className="h-5 w-5" />} label="Claim record" sub="With audit trail" />
         </ol>
 
         <ul className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2">
-          <PipelineCard
+          <TitleBodyCard
             title="response_schema, not free-text JSON"
             body="Gemini is invoked with response_mime_type=application/json and a hand-written response_schema covering every claim field. Output is then re-validated through a Pydantic ExtractionResult with field-level validators (dates, currency, amounts, tag limits). Two gates, two formats — the same drift bug has to escape both."
           />
-          <PipelineCard
+          <TitleBodyCard
             title="Human-in-the-loop is the default"
             body="No claim record is ever created from a model output alone. The frontend prefills a form, marks AI-filled fields with a badge, and the household member confirms each value before save. A feature flag (ENABLE_INSURANCE_AI_EXTRACTION) can disable the AI path entirely without touching the rest of the module."
           />
-          <PipelineCard
+          <TitleBodyCard
             title="Persistence captures the raw model output too"
             body="Every call writes an insurance_ai_extractions row containing structured_result, raw_response, status, error_message and model_name. The structured output is what fills the form; the raw response is what we go back to when something looks wrong six months later."
           />
-          <PipelineCard
+          <TitleBodyCard
             title="Rate limited and key-gated"
             body="The AI extraction endpoints sit on a parse tier (10 req/min). Missing GEMINI_API_KEY in the environment makes the route fail closed with an explicit error — production won't silently degrade to a different code path."
           />
@@ -239,6 +242,8 @@ export default function CaseStudy() {
       <Section eyebrow="The product" title="What it looks like">
         <div className="space-y-10 md:space-y-14">
           <ImageSlot
+            baseDir="oikero"
+            variant="dark"
             label="Insurance · Dashboard"
             caption="Outstanding vs reimbursed, total claims, reimbursement rate, plus a 'Needs attention' queue of drafts and submitted-but-unpaid claims. Acts as the household's working surface, not just a report."
             filename="claims-dashboard.jpg"
@@ -247,6 +252,8 @@ export default function CaseStudy() {
             alt="Insurance Claims dashboard with KPIs for outstanding, reimbursed, total claims and reimbursement rate, plus a Needs Attention queue and breakdowns by year, person, status and type."
           />
           <ImageSlot
+            baseDir="oikero"
+            variant="dark"
             label="Insurance · Analytics"
             caption="Claimed vs reimbursed by year, distribution by type, person and status. The same data the dashboard surfaces, rendered for trend reading rather than action."
             filename="insurance-analytics.jpg"
@@ -255,6 +262,8 @@ export default function CaseStudy() {
             alt="Insurance Analytics view with a bar chart of claimed vs reimbursed by year, a donut chart of claims by type, a horizontal bar chart of claims by person and a status distribution stack."
           />
           <ImageSlot
+            baseDir="oikero"
+            variant="dark"
             label="Budget · Balance sheet"
             caption="Multi-currency net worth with per-country accounts (CHF / EUR / GBP / PLN) and monthly FX conversion. Cash Flow Lite chooses less reporting on purpose."
             filename="budget.jpg"
@@ -263,6 +272,8 @@ export default function CaseStudy() {
             alt="Budget Balance Sheet showing total net worth in CHF with per-country breakdowns for United Kingdom, Euro Zone, Poland and Switzerland."
           />
           <ImageSlot
+            baseDir="oikero"
+            variant="dark"
             label="Lab results · Trends"
             caption="Verified lab values plotted over time against the reference range. Deterministic pdfplumber pipeline parses results from upload; the human verifies before they enter the trend."
             filename="lab-result.jpg"
@@ -271,6 +282,8 @@ export default function CaseStudy() {
             alt="Lab results trends page showing a bar chart of glucose values over 12 data points across a year, with reference range and a table of dated readings."
           />
           <ImageSlot
+            baseDir="oikero"
+            variant="dark"
             label="Plants"
             caption="Per-plant moisture timelines, room labels, status badges. Readings arrive from manual entry or an Arduino device hitting a hardened HTTPS endpoint with a per-household key."
             filename="plants.jpg"
@@ -284,27 +297,27 @@ export default function CaseStudy() {
       {/* ── Decisions ────────────────────────────────────────────── */}
       <Section eyebrow="The hard parts" title="Decisions & trade-offs">
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-          <DecisionCard
+          <TitleBodyCard
             title="Modular household OS, not five separate apps"
             body="The first instinct was a portfolio tracker. The better one was a platform: one auth, one household model, one storage pattern, five modules sharing them. The cost is upfront wiring; the payoff is that every new module ships in days, not weeks."
           />
-          <DecisionCard
+          <TitleBodyCard
             title="Event-sourced investments"
             body="Holdings and snapshots are derived from a portfolio_events table that is the single source of truth. Re-importing a corrected CSV doesn't mutate state — it appends events, and the daily snapshot pipeline rebuilds from there. Audit and correctness for free."
           />
-          <DecisionCard
+          <TitleBodyCard
             title="FastAPI owns the business logic"
             body="Next.js stays thin — no API routes for domain data. Every domain call goes to FastAPI, which holds Pydantic schemas, household scoping, rate limits and the Gemini calls. The frontend can be rewritten without touching business logic, and the API can outlive the frontend."
           />
-          <DecisionCard
+          <TitleBodyCard
             title="Supabase as plumbing, not as the app"
             body="Postgres + Auth + Storage. The backend uses the service_role key from server-side; the frontend never queries domain tables directly. Supabase is the database, not the application layer — which means it can be swapped for raw Postgres later if it ever stops fitting."
           />
-          <DecisionCard
+          <TitleBodyCard
             title="Deterministic for labs, LLM only for claims"
             body="Lab PDFs come from a small number of providers with stable layouts — a rule-based pdfplumber pipeline handles them with no token cost and full reproducibility. Insurance claim documents have no stable layout — that's where the LLM earns its keep. Match the tool to the shape of the data."
           />
-          <DecisionCard
+          <TitleBodyCard
             title="Cash Flow Lite — chose less"
             body="A full budget app would have meant categorising every transaction across every bank. Instead I built the minimum that answers the actual question: where did the money go this month, roughly? Detailed expense tracking is deferred behind a feature flag rather than half-built."
           />
@@ -322,22 +335,22 @@ export default function CaseStudy() {
           straight to a regulated environment when needed.
         </p>
         <ul className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2">
-          <ProductionCard
+          <IconCard
             icon={<History />}
             title="Immutable audit log"
             body="Every sensitive mutation writes a row into audit_log: who, when, which household, which entity, what action, what metadata. A Postgres trigger blocks updates and deletes on the table itself, so the log can be queried but never rewritten."
           />
-          <ProductionCard
+          <IconCard
             icon={<Lock />}
             title="Row Level Security as defence-in-depth"
             body="Application-layer scoping is primary: every request carries a UserContext, and verify_household_access() runs on every sensitive route. Row Level Security on 16 domain tables is the fallback — if the application layer ever has a bug, a leaked anon key still can't cross household boundaries."
           />
-          <ProductionCard
+          <IconCard
             icon={<Database />}
             title="Household-scoped data model"
             body="Every domain row carries a household_id and resolves through a household-aware repository layer. Multi-household memberships are in the schema today; the UI assumes a default household and switches per profile. Hardening the boundary in the data model meant the UI never had to enforce it."
           />
-          <ProductionCard
+          <IconCard
             icon={<ShieldCheck />}
             title="Closed allowlist auth, no public signup"
             body="Production is Google OAuth via Supabase, but logins are gated by pre-provisioned app_profiles and household_memberships. An admin script provisions users; auto-provisioning on first login was deliberately rejected. Local dev runs a fail-closed dev_bypass that refuses to start if env is misconfigured."
@@ -365,10 +378,7 @@ export default function CaseStudy() {
           <p className="text-xs font-bold uppercase tracking-wider text-emerald-800/70">
             Transferable case · Enterprise insurance claim intake
           </p>
-          <h3
-            className="mt-2 text-2xl font-semibold tracking-tight text-stone-900 md:text-3xl"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
+          <h3 className="mt-2 font-display text-2xl font-semibold tracking-tight text-stone-900 md:text-3xl">
             The same pipeline runs at 10,000 claims a day.
           </h3>
           <p className="mt-4 max-w-3xl text-[16px] leading-[1.75] text-stone-700">
@@ -439,7 +449,7 @@ export default function CaseStudy() {
         <div className="mt-6 flex flex-wrap gap-3">
           <a
             href={site.demoMailto("Household operations platform (Oikero)")}
-            className="inline-flex items-center gap-2 rounded-xl bg-[#0f5132] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#0a3d24]"
+            className="inline-flex items-center gap-2 rounded-xl bg-emerald-ink px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-ink-deep"
           >
             <Mail className="h-4 w-4" />
             Request demo
@@ -475,196 +485,13 @@ export default function CaseStudy() {
   );
 }
 
-/* ── Building blocks ──────────────────────────────────────────────── */
-
-type Tone = "blue" | "emerald" | "amber" | "purple" | "lime" | "stone";
-
-const TONE: Record<Tone, { wrap: string; icon: string }> = {
-  blue: { wrap: "bg-[#5d6fff]/10 ring-[#5d6fff]/20", icon: "text-[#1a2f73]" },
-  emerald: { wrap: "bg-emerald-500/10 ring-emerald-500/20", icon: "text-emerald-800" },
-  amber: { wrap: "bg-[#efb84a]/15 ring-[#efb84a]/30", icon: "text-[#7a4f10]" },
-  purple: { wrap: "bg-purple-500/10 ring-purple-500/20", icon: "text-purple-800" },
-  lime: { wrap: "bg-lime-500/15 ring-lime-500/25", icon: "text-lime-800" },
-  stone: { wrap: "bg-stone-500/10 ring-stone-500/20", icon: "text-stone-800" },
-};
-
-function ModuleCard({
-  icon,
-  tone,
-  title,
-  tagline,
-  body,
-}: {
-  icon: React.ReactNode;
-  tone: Tone;
-  title: string;
-  tagline: string;
-  body: string;
-}) {
-  const t = TONE[tone];
-  return (
-    <li className="rounded-2xl border border-stone-200/80 bg-white/60 p-6">
-      <div className={`grid h-11 w-11 place-items-center rounded-xl ring-1 ${t.wrap} ${t.icon}`}>
-        {icon}
-      </div>
-      <p
-        className="mt-3 text-lg font-semibold text-stone-900"
-        style={{ fontFamily: "var(--font-display)" }}
-      >
-        {title}
-      </p>
-      <p className="mt-0.5 text-[12px] font-bold uppercase tracking-wider text-stone-500">
-        {tagline}
-      </p>
-      <p className="mt-3 text-[14.5px] leading-[1.7] text-stone-700">{body}</p>
-    </li>
-  );
-}
-
-function PipelineStep({
-  n,
-  icon,
-  label,
-  sub,
-}: {
-  n: number;
-  icon: React.ReactNode;
-  label: string;
-  sub: string;
-}) {
-  return (
-    <li className="relative rounded-2xl border border-stone-200/80 bg-white/60 p-4">
-      <span className="absolute right-2.5 top-2 text-[10px] font-bold text-stone-300">
-        0{n}
-      </span>
-      <div className="grid h-9 w-9 place-items-center rounded-lg bg-emerald-500/10 text-emerald-800 ring-1 ring-emerald-500/20">
-        {icon}
-      </div>
-      <p
-        className="mt-3 text-sm font-semibold text-stone-900"
-        style={{ fontFamily: "var(--font-display)" }}
-      >
-        {label}
-      </p>
-      <p className="mt-0.5 text-[12px] text-stone-600">{sub}</p>
-    </li>
-  );
-}
-
-function PipelineCard({ title, body }: { title: string; body: string }) {
-  return (
-    <div className="rounded-2xl border border-stone-200/80 bg-white/60 p-6">
-      <p
-        className="text-base font-semibold text-stone-900"
-        style={{ fontFamily: "var(--font-display)" }}
-      >
-        {title}
-      </p>
-      <p className="mt-2 text-[15px] leading-[1.7] text-stone-700">{body}</p>
-    </div>
-  );
-}
-
-function DecisionCard({ title, body }: { title: string; body: string }) {
-  return (
-    <div className="rounded-2xl border border-stone-200/80 bg-white/60 p-6">
-      <p
-        className="text-base font-semibold text-stone-900"
-        style={{ fontFamily: "var(--font-display)" }}
-      >
-        {title}
-      </p>
-      <p className="mt-2 text-[15px] leading-[1.7] text-stone-700">{body}</p>
-    </div>
-  );
-}
-
-function ProductionCard({
-  icon,
-  title,
-  body,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  body: string;
-}) {
-  return (
-    <li className="rounded-2xl border border-stone-200/80 bg-white/60 p-6">
-      <div className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-500/10 text-emerald-800 ring-1 ring-emerald-500/20">
-        {icon}
-      </div>
-      <p
-        className="mt-3 text-base font-semibold text-stone-900"
-        style={{ fontFamily: "var(--font-display)" }}
-      >
-        {title}
-      </p>
-      <p className="mt-2 text-[15px] leading-[1.7] text-stone-700">{body}</p>
-    </li>
-  );
-}
-
-function StackBox({ label, items }: { label: string; items: string[] }) {
-  return (
-    <div className="rounded-2xl border border-stone-200/80 bg-white/60 p-5">
-      <p className="text-[11px] font-bold uppercase tracking-wider text-stone-500">
-        {label}
-      </p>
-      <ul className="mt-3 space-y-1 text-[14px] text-stone-700">
-        {items.map((i) => (
-          <li key={i}>{i}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function ImageSlot({
-  label,
-  caption,
-  filename,
-  alt,
-  width,
-  height,
-}: {
-  label: string;
-  caption: string;
-  filename: string;
-  alt: string;
-  width: number;
-  height: number;
-}) {
-  // Single-column layout — every screenshot renders at full page
-  // width in its natural aspect ratio, no crop. Inspired by the
-  // analyst-portfolio format where each visualisation gets the
-  // whole slide. Label is rendered above the image (not overlaid)
-  // so it never collides with the screenshot's own header text.
-  return (
-    <figure>
-      <span className="inline-flex rounded-full border border-stone-300/70 bg-white/70 px-3 py-1 text-[10.5px] font-bold uppercase tracking-[0.18em] text-stone-600">
-        {label}
-      </span>
-      <div className="relative mt-3 overflow-hidden rounded-2xl border border-stone-200/60 bg-[#0a0d12] shadow-[0_18px_48px_rgba(15,32,40,0.20)]">
-        <Image
-          src={`/case-studies/oikero/${filename}`}
-          alt={alt}
-          width={width}
-          height={height}
-          sizes="(min-width: 768px) 1000px, 100vw"
-          className="block h-auto w-full"
-        />
-      </div>
-      <figcaption className="mt-3 text-[14px] leading-[1.6] text-stone-600">
-        {caption}
-      </figcaption>
-    </figure>
-  );
-}
-
+/** Hero variant of the screenshot slot — taller, deeper shadow, no
+ *  label chip. Kept inline because it's used once and styled differently
+ *  from the in-tour screenshots. */
 function HeroDashboardSlot() {
   return (
     <figure>
-      <div className="relative overflow-hidden rounded-3xl border border-stone-200/60 bg-[#0a0d12] shadow-[0_24px_72px_rgba(15,32,40,0.25)]">
+      <div className="relative overflow-hidden rounded-3xl border border-stone-200/60 bg-screen-dark shadow-[0_24px_72px_rgba(15,32,40,0.25)]">
         <Image
           src="/case-studies/oikero/investments.jpg"
           alt="Investments dashboard of the household operations platform — total value, daily change, valuation coverage, portfolio performance chart and period P/L."

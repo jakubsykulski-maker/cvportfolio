@@ -28,6 +28,9 @@ const OG_DESCRIPTION =
   "Operations and analytics professional with 8+ years across BIS, Stuart (DPD) and FlixBus. Now building AI-assisted internal tools — case studies inside.";
 
 export const metadata: Metadata = {
+  // Absolute base for OG / Twitter image URLs. Without this, Next
+  // falls back to http://localhost:3000 at build time and warns.
+  metadataBase: new URL(site.url),
   title: OG_TITLE,
   description: OG_DESCRIPTION,
   // Unlisted — recruiters reach this via direct CV link, not search engines.
@@ -57,6 +60,9 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
+  // Matches --color-cream in globals.css. Next bakes this into the
+  // <meta name="theme-color"> tag at build time, so it has to be a
+  // literal hex — keep in sync if the cream token changes.
   themeColor: "#faf6ef",
   width: "device-width",
   initialScale: 1,

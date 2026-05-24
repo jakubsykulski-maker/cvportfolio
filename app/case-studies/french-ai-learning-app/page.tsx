@@ -6,10 +6,10 @@
  * + workflow) and then read in 3 minutes (decisions, production
  * concerns, transferable workflow).
  *
- * SCREENSHOT PLACEHOLDERS — every `<ImageSlot>` below marks a spot
- * where a real .png from /public/case-studies/french-ai/ should be
- * dropped. The labelled placeholder boxes intentionally render
- * even without files so the layout stays intact during edits.
+ * Shared building blocks (cards, steps, stack box, screenshot slot)
+ * live in components/case-study.tsx — keep new ones there too.
+ * Inline-only components below are the page-specific bits:
+ * BeforeAfterSlot (the hero pair) and DemoVideo (phone recording).
  */
 
 import type { Metadata } from "next";
@@ -33,6 +33,13 @@ import {
 import { Hairline, Section } from "@/components/section";
 import { CopyButton } from "@/components/copy-button";
 import { ProjectMeta } from "@/components/project-meta";
+import {
+  IconCard,
+  ImageSlot,
+  NumberedStep,
+  StackBox,
+  TitleBodyCard,
+} from "@/components/case-study";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -62,10 +69,7 @@ export default function CaseStudy() {
         <p className="text-[0.78rem] font-bold uppercase tracking-[0.14em] text-stone-500">
           Case study · Education · Knowledge workflows
         </p>
-        <h1
-          className="shimmer mt-4 text-[clamp(2.25rem,6.5vw,4.25rem)] font-extrabold leading-[1.05] tracking-tight"
-          style={{ fontFamily: "var(--font-display)" }}
-        >
+        <h1 className="shimmer mt-4 font-display text-[clamp(2.25rem,6.5vw,4.25rem)] font-extrabold leading-[1.05] tracking-tight">
           Turning handwritten classroom notes
           <br />
           into structured learning material.
@@ -80,7 +84,7 @@ export default function CaseStudy() {
         <div className="mt-6 flex flex-wrap gap-3">
           <a
             href={site.demoMailto("French AI Learning App")}
-            className="inline-flex items-center gap-2 rounded-xl bg-[#1a2f73] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-[#13245a]"
+            className="inline-flex items-center gap-2 rounded-xl bg-accent-deep px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-accent-darker"
           >
             <Mail className="h-4 w-4" />
             Request demo access
@@ -136,11 +140,11 @@ export default function CaseStudy() {
       {/* ── Workflow ─────────────────────────────────────────────── */}
       <Section eyebrow="How it works" title="The workflow">
         <ol className="grid grid-cols-1 gap-4 md:grid-cols-5">
-          <WorkflowStep n={1} icon={<Camera className="h-5 w-5" />} label="Photo" sub="Mobile or desktop upload" />
-          <WorkflowStep n={2} icon={<Sparkles className="h-5 w-5" />} label="Gemini" sub="Multi-focus extraction" />
-          <WorkflowStep n={3} icon={<FileText className="h-5 w-5" />} label="Structured JSON" sub="Validated server-side" />
-          <WorkflowStep n={4} icon={<BookOpenCheck className="h-5 w-5" />} label="Stored card" sub="Searchable, shareable" />
-          <WorkflowStep n={5} icon={<Printer className="h-5 w-5" />} label="Revise / print" sub="Spaced repetition ready" />
+          <NumberedStep tone="accent" n={1} icon={<Camera className="h-5 w-5" />} label="Photo" sub="Mobile or desktop upload" />
+          <NumberedStep tone="accent" n={2} icon={<Sparkles className="h-5 w-5" />} label="Gemini" sub="Multi-focus extraction" />
+          <NumberedStep tone="accent" n={3} icon={<FileText className="h-5 w-5" />} label="Structured JSON" sub="Validated server-side" />
+          <NumberedStep tone="accent" n={4} icon={<BookOpenCheck className="h-5 w-5" />} label="Stored card" sub="Searchable, shareable" />
+          <NumberedStep tone="accent" n={5} icon={<Printer className="h-5 w-5" />} label="Revise / print" sub="Spaced repetition ready" />
         </ol>
       </Section>
 
@@ -163,6 +167,8 @@ export default function CaseStudy() {
       <Section eyebrow="The product" title="What it does">
         <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2">
           <ImageSlot
+            baseDir="french-ai"
+            sizes="(min-width: 768px) 50vw, 100vw"
             label="Home"
             caption="Three entry points: weekly course path, revision library, scanner. The big calm title is on purpose — most learning apps shout, this one breathes."
             filename="home.jpg"
@@ -171,6 +177,8 @@ export default function CaseStudy() {
             alt="Home dashboard of the French learning app with three large tiles linking to weekly course path, revision library and scanner."
           />
           <ImageSlot
+            baseDir="french-ai"
+            sizes="(min-width: 768px) 50vw, 100vw"
             label="Weekly course path"
             caption="Each week opens to its sections in order, printable in one click. Scanned fiches attach to the week they belong to, so revision stays close to the lesson."
             filename="parcours.jpg"
@@ -184,23 +192,23 @@ export default function CaseStudy() {
       {/* ── Decisions ────────────────────────────────────────────── */}
       <Section eyebrow="The hard parts" title="Decisions & trade-offs">
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-          <DecisionCard
+          <TitleBodyCard
             title="Gemini over OpenAI"
             body="Gemini 2.5 and 3 handle multimodal input (image + text) natively with structured JSON output via response_schema. Cheaper per call at our volume, and the schema-enforced output meant less brittle parsing on the backend."
           />
-          <DecisionCard
+          <TitleBodyCard
             title="response_schema, not free-text JSON"
             body="Free-text JSON output drifts: keys disappear, types change. Forcing Gemini through a strict schema kills that whole class of bugs and acts as a second line of defence against prompt injection (the model can't easily exfiltrate fields that aren't in the schema)."
           />
-          <DecisionCard
+          <TitleBodyCard
             title="Typed content blocks, not MDX"
             body="Course content lives as typed JSON blocks (heading, paragraph, vocab, example, quiz) — not freeform Markdown. Editors stay safe, admin UI can render previews, and the same blocks render to mobile, print, and revision in three styles."
           />
-          <DecisionCard
+          <TitleBodyCard
             title="FastAPI, not Next.js API routes"
             body="The AI pipeline (image validation, Gemini calls, post-processing) is enough work that I wanted a typed Python service with proper test coverage, separate from the UI deploy. Render auto-deploys the backend; Vercel handles the frontend. Two failure modes, isolated."
           />
-          <DecisionCard
+          <TitleBodyCard
             title="Multi-focus, not one-shot"
             body="Users pick which sections they want (vocabulary, grammar, conjugation, translation). Each focus is an independent extraction with its own validation. Smaller prompts, better focus quality, and one focus failing doesn't sink the whole scan."
           />
@@ -219,22 +227,22 @@ export default function CaseStudy() {
           hygiene as first-class concerns — not afterthoughts.
         </p>
         <ul className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2">
-          <ProductionCard
+          <IconCard
             icon={<Shield />}
             title="Defence in depth against prompt injection"
             body="Three layers in the Gemini pipeline: a security directive at the top of the system prompt, response_schema constraining output shape, and URL redaction against an allowlist before content reaches the model. Each layer can fail and the others still catch the attack."
           />
-          <ProductionCard
+          <IconCard
             icon={<ScanLine />}
             title="Image validation by magic bytes"
             body="Uploaded images are checked by magic bytes — not the multipart Content-Type the browser claims. Anything not in the explicit allowlist (PNG, JPEG, HEIC, WebP) is rejected, then re-encoded through Pillow before reaching the AI. Polyglot files don't get past the gate."
           />
-          <ProductionCard
+          <IconCard
             icon={<Database />}
             title="Row Level Security as fallback"
             body="The backend uses Supabase service-role and filters by user at the service layer. Row Level Security at the Postgres layer is enabled regardless — so a leaked anon key, or a future direct PostgREST hit, still can't cross user boundaries."
           />
-          <ProductionCard
+          <IconCard
             icon={<Eye />}
             title="Observability + dependency audit in CI"
             body="Logfire spans on every request, Sentry on uncaught errors with PII off. CI runs pip-audit on every backend build and npm ci --ignore-scripts to defuse postinstall worms. Dependabot opens PRs weekly; major bumps stay manual."
@@ -262,16 +270,11 @@ export default function CaseStudy() {
 
       {/* ── Transferable workflow ────────────────────────────────── */}
       <Section eyebrow="Why this matters" title="A workflow, not a feature">
-        <div className="rounded-3xl border border-stone-200/80 bg-gradient-to-br from-[#efb84a]/[0.10] via-white/60 to-white/40 p-7 md:p-10">
-          <p
-            className="text-xs font-bold uppercase tracking-wider text-[#7a4f10]/70"
-          >
+        <div className="rounded-3xl border border-stone-200/80 bg-gradient-to-br from-warm/10 via-white/60 to-white/40 p-7 md:p-10">
+          <p className="text-xs font-bold uppercase tracking-wider text-warm-ink/70">
             Transferable case · Insurance claims intake
           </p>
-          <h3
-            className="mt-2 text-2xl font-semibold tracking-tight text-stone-900 md:text-3xl"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
+          <h3 className="mt-2 font-display text-2xl font-semibold tracking-tight text-stone-900 md:text-3xl">
             The same pipeline runs on a claim form.
           </h3>
           <p className="mt-4 max-w-3xl text-[16px] leading-[1.75] text-stone-700">
@@ -338,7 +341,7 @@ export default function CaseStudy() {
         <div className="mt-6 flex flex-wrap gap-3">
           <a
             href={site.demoMailto("French AI Learning App")}
-            className="inline-flex items-center gap-2 rounded-xl bg-[#1a2f73] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#13245a]"
+            className="inline-flex items-center gap-2 rounded-xl bg-accent-deep px-4 py-2 text-sm font-semibold text-white transition hover:bg-accent-darker"
           >
             <Mail className="h-4 w-4" />
             Request demo
@@ -374,145 +377,11 @@ export default function CaseStudy() {
   );
 }
 
-/* ── Building blocks ──────────────────────────────────────────────── */
-
-function WorkflowStep({
-  n,
-  icon,
-  label,
-  sub,
-}: {
-  n: number;
-  icon: React.ReactNode;
-  label: string;
-  sub: string;
-}) {
-  return (
-    <li className="relative rounded-2xl border border-stone-200/80 bg-white/60 p-5">
-      <span className="absolute right-3 top-3 text-[11px] font-bold text-stone-300">
-        0{n}
-      </span>
-      <div className="grid h-10 w-10 place-items-center rounded-xl bg-[#5d6fff]/10 text-[#1a2f73] ring-1 ring-[#5d6fff]/20">
-        {icon}
-      </div>
-      <p
-        className="mt-3 text-base font-semibold text-stone-900"
-        style={{ fontFamily: "var(--font-display)" }}
-      >
-        {label}
-      </p>
-      <p className="mt-1 text-[13px] text-stone-600">{sub}</p>
-    </li>
-  );
-}
-
-function DecisionCard({ title, body }: { title: string; body: string }) {
-  return (
-    <div className="rounded-2xl border border-stone-200/80 bg-white/60 p-6">
-      <p
-        className="text-base font-semibold text-stone-900"
-        style={{ fontFamily: "var(--font-display)" }}
-      >
-        {title}
-      </p>
-      <p className="mt-2 text-[15px] leading-[1.7] text-stone-700">{body}</p>
-    </div>
-  );
-}
-
-function ProductionCard({
-  icon,
-  title,
-  body,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  body: string;
-}) {
-  return (
-    <li className="rounded-2xl border border-stone-200/80 bg-white/60 p-6">
-      <div className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-500/10 text-emerald-800 ring-1 ring-emerald-500/20">
-        {icon}
-      </div>
-      <p
-        className="mt-3 text-base font-semibold text-stone-900"
-        style={{ fontFamily: "var(--font-display)" }}
-      >
-        {title}
-      </p>
-      <p className="mt-2 text-[15px] leading-[1.7] text-stone-700">{body}</p>
-    </li>
-  );
-}
-
-function StackBox({ label, items }: { label: string; items: string[] }) {
-  return (
-    <div className="rounded-2xl border border-stone-200/80 bg-white/60 p-5">
-      <p className="text-[11px] font-bold uppercase tracking-wider text-stone-500">
-        {label}
-      </p>
-      <ul className="mt-3 space-y-1 text-[14px] text-stone-700">
-        {items.map((i) => (
-          <li key={i}>{i}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-/**
- * Product screenshot — renders the real PNG/JPG from
- * /public/case-studies/french-ai/ at its natural aspect ratio.
- * `object-cover object-top` keeps the visually meaningful top of
- * the screenshot (header + first rows) visible even when ratios
- * differ across slots.
- */
-function ImageSlot({
-  label,
-  caption,
-  filename,
-  wide,
-  alt,
-  width,
-  height,
-}: {
-  label: string;
-  caption: string;
-  filename: string;
-  wide?: boolean;
-  alt: string;
-  width: number;
-  height: number;
-}) {
-  return (
-    <figure className={wide ? "md:col-span-2" : ""}>
-      <span className="inline-flex rounded-full border border-stone-300/70 bg-white/70 px-3 py-1 text-[10.5px] font-bold uppercase tracking-[0.18em] text-stone-600">
-        {label}
-      </span>
-      <div className="relative mt-3 overflow-hidden rounded-2xl border border-stone-200/80 bg-[#f3ecdf]/40">
-        <Image
-          src={`/case-studies/french-ai/${filename}`}
-          alt={alt}
-          width={width}
-          height={height}
-          sizes="(min-width: 768px) 50vw, 100vw"
-          className="block h-auto w-full"
-        />
-      </div>
-      <figcaption className="mt-3 text-[14px] leading-[1.55] text-stone-600">
-        {caption}
-      </figcaption>
-    </figure>
-  );
-}
-
 /**
  * Phone-recorded lifecycle demo — autoplays muted on loop so a
  * recruiter sees motion within the first viewport, on phone or
  * desktop. `playsInline` is required for iOS Safari autoplay to
- * work without forcing fullscreen. Native aspect ratio preserved
- * by the video element itself, capped to a phone-sized max-width
- * for portrait recordings; adjust max-w if the source is landscape.
+ * work without forcing fullscreen.
  */
 function DemoVideo() {
   return (
@@ -540,12 +409,8 @@ function DemoVideo() {
 /**
  * Hero before/after — two side-by-side images carrying the whole
  * pitch in one glance. Handwritten notes on the left, structured
- * vocabulary card on the right.
- *
- * The card screenshot is taller than the notes (portrait), so we
- * use object-cover with object-top to crop the bottom while keeping
- * the header + first rows visible. Both panels share a 4/3 box so
- * the pair stays visually balanced.
+ * vocabulary card on the right. Page-specific (only French uses
+ * this layout) so it stays inline rather than in components/case-study.
  */
 function BeforeAfterSlot({
   kind,
@@ -556,7 +421,6 @@ function BeforeAfterSlot({
 }) {
   const label = kind === "before" ? "BEFORE" : "AFTER";
   const filename = kind === "before" ? "notes-before.jpg" : "card-after.jpg";
-  // Natural dimensions — Image renders at full aspect, no crop.
   const dims =
     kind === "before"
       ? { w: 1999, h: 1499 } // notes — 4:3 landscape
@@ -565,18 +429,16 @@ function BeforeAfterSlot({
     kind === "before"
       ? "A page of handwritten French class notes — vocabulary, expressions and full sentences for the topic 'Se décrire professionnellement'."
       : "Generated vocabulary card from the same notes — 14 entries with French definitions, English translations and part-of-speech tags.";
-  const ringColor =
+  const frame =
     kind === "before"
-      ? "border-stone-300/80 bg-[#f3ecdf]/40"
-      : "border-[#5d6fff]/30 bg-gradient-to-br from-[#5d6fff]/[0.06] via-white/40 to-white/40";
+      ? "border-stone-300/80 bg-cream-deep/40"
+      : "border-accent/30 bg-gradient-to-br from-accent/[0.06] via-white/40 to-white/40";
   return (
     <figure>
       <span className="inline-flex rounded-full border border-stone-300/70 bg-white/70 px-3 py-1 text-[10.5px] font-bold uppercase tracking-[0.18em] text-stone-600">
         {label}
       </span>
-      <div
-        className={`relative mt-3 overflow-hidden rounded-3xl border ${ringColor}`}
-      >
+      <div className={`relative mt-3 overflow-hidden rounded-3xl border ${frame}`}>
         <Image
           src={`/case-studies/french-ai/${filename}`}
           alt={alt}

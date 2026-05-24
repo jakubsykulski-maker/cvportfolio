@@ -23,10 +23,7 @@ export function Section({
         </p>
       ) : null}
       {title ? (
-        <h2
-          className="mt-2 text-3xl font-semibold tracking-tight text-stone-900 md:text-4xl"
-          style={{ fontFamily: "var(--font-display)" }}
-        >
+        <h2 className="mt-2 font-display text-3xl font-semibold tracking-tight text-stone-900 md:text-4xl">
           {title}
         </h2>
       ) : null}

@@ -11,8 +11,24 @@
   --color-cream: #faf6ef;
   --color-cream-deep: #f3ecdf;
   --color-stone-ink: #1c1a16;
+
+  /* Accent blue — primary CTA + scanner case-study tone. */
   --color-accent: #5d6fff;
   --color-accent-deep: #1a2f73;
+  --color-accent-darker: #13245a;
+
+  /* Dark backdrop for screenshot frames in Oikero. */
+  --color-screen-dark: #0a0d12;
+
+  /* Warm "ambre" — used for transferable-workflow callout + amber
+     tile in the Oikero module grid. */
+  --color-warm: #efb84a;
+  --color-warm-ink: #7a4f10;
+
+  /* Deep emerald — Oikero primary button (distinct from Tailwind's
+     emerald-500 utility scale, which we still use for tints). */
+  --color-emerald-ink: #0f5132;
+  --color-emerald-ink-deep: #0a3d24;
 
   --font-display: var(--font-sora), "Inter", system-ui, sans-serif;
   --font-serif: var(--font-literata), "Iowan Old Style", Georgia, serif;

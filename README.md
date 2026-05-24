@@ -30,41 +30,47 @@ Edit there, never inline in page files.
 
 ## Add a screenshot
 
-Drop the .png into `public/case-studies/french-ai/`, using the
-filenames already wired in the case-study page (look for
-`SCREENSHOT:` comments). The placeholder boxes auto-render until
-the file exists. To swap them for real images, replace the inner
-content of `ImageSlot` / `BeforeAfterSlot` in
-`app/case-studies/french-ai-learning-app/page.tsx` with
-`<Image src=... />` from `next/image`.
+Drop the .jpg into the matching `public/case-studies/<slug>/`
+folder, using the exact filename referenced from the case-study
+page. The page renders straight `<Image>` — there are no
+placeholder boxes any more, so a missing file 404s. Add files
+before merging the page change that references them.
+
+Filenames listed below are the ones currently wired in the two
+case studies. Anything not listed isn't shipped (and the page
+copy doesn't reference it). To add a new screen, drop the file
+and add a matching `<ImageSlot>` in the case-study page.
 
 ### French Learning App — `public/case-studies/french-ai/`
 
-| Filename            | What                                  |
-| ------------------- | ------------------------------------- |
-| `notes-before.jpg`  | A page of handwritten French notes    |
-| `card-after.png`    | The generated vocab card UI           |
-| `home.png`          | Home dashboard with 3 hub tiles       |
-| `scanner.png`       | Scanner upload screen                 |
-| `card.png`          | Vocabulary card detail view           |
-| `revision.png`      | Revision library list                 |
-| `parcours.png`      | Weekly course path view (wide)        |
+| Filename            | What                                                         |
+| ------------------- | ------------------------------------------------------------ |
+| `notes-before.jpg`  | A page of handwritten French notes (hero — Before)           |
+| `card-after.jpg`    | Generated vocab card UI (hero — After + index thumbnail)     |
+| `home.jpg`          | Home dashboard with three hub tiles                          |
+| `parcours.jpg`      | Weekly course path view                                      |
+| `demo-mobile.mp4`   | Phone-recorded full lifecycle (autoplays muted in hero)      |
 
-Use mock content only — never your tutor's real notes.
+Use mock content only — never your tutor's real notes. Scanner
+upload, card detail and revision-library screens were
+intentionally skipped from the v1 product tour; capture them
+later if the tour grows.
 
 ### Household ops platform (Oikero) — `public/case-studies/oikero/`
 
-| Filename            | What                                                       | Mock before capture                                              |
-| ------------------- | ---------------------------------------------------------- | ---------------------------------------------------------------- |
-| `home.png`          | Hero — home control centre with 5 module tiles (dark mode) | Net worth / portfolio value, attention item titles, display name |
-| `investments.png`   | Investments dashboard — allocation + top holdings + P&L    | All currency figures, ticker names, broker / account labels      |
-| `claim-detail.png`  | **AI showcase** — claim form with AI-filled badges + attachment | Provider, service date, CHF amounts, tags, attachment filename |
-| `budget.png`        | Cash Flow Lite — monthly KPIs + chart                      | Income, expenses estimate, net-worth trend                       |
-| `lab-result.png`    | Lab result detail — results table with reference-range flags | Person name, lab name, test names, numeric results, ranges     |
-| `plants.png`        | Plants list or detail — moisture timeline (wide)           | Plant names, room labels, moisture % timeline                    |
+| Filename                     | What                                                              | Mock before capture                                                |
+| ---------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------ |
+| `investments.jpg`            | Investments dashboard (also serves as page hero + index thumbnail) | All currency figures, ticker names, broker / account labels        |
+| `claims-dashboard.jpg`       | Insurance — KPIs + Needs Attention queue                           | Outstanding CHF, reimbursed CHF, person / provider names           |
+| `insurance-analytics.jpg`    | Insurance — claimed-vs-reimbursed trends + distribution            | Per-year CHF amounts, claim types, person split                    |
+| `budget.jpg`                 | Cash Flow Lite — multi-currency balance sheet                      | Net worth totals, per-country amounts (CHF / EUR / GBP / PLN)      |
+| `lab-result.jpg`             | Lab result trends vs reference range                               | Person name, lab name, test names, numeric results, ranges         |
+| `plants.jpg`                 | Plants list with moisture status                                   | Plant names, room labels, moisture % values                        |
 
 Every figure on a Oikero screen is sensitive. Mock everything, or
-spin up a fresh household with seed data, before capture.
+spin up a fresh household with seed data, before capture. The
+five-module home dashboard and the claim-detail AI-prefill view
+are not yet wired — the page hero uses `investments.jpg` instead.
 
 ## Discoverability
 
