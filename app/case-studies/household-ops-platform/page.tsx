@@ -1,5 +1,5 @@
 /**
- * Case study #2 — Household operations platform (Oikero).
+ * Case study #2 — Household operations platform.
  *
  * Recruiter-facing deep dive on a modular private platform that
  * unifies investments, insurance claims, budget, lab results and
@@ -49,7 +49,7 @@ import {
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Household operations platform (Oikero) — Case Study · Jakub Sykulski",
+  title: "Household operations platform — Case Study · Jakub Sykulski",
   description:
     "A modular private platform that unifies investments, insurance claims, budget, lab results and plant monitoring — with AI-assisted insurance claim intake via Gemini.",
   robots: { index: false, follow: false },
@@ -91,7 +91,7 @@ export default function CaseStudy() {
 
         <div className="mt-6 flex flex-wrap gap-3">
           <a
-            href={site.demoMailto("Household operations platform (Oikero)")}
+            href={site.demoMailto("Household operations platform")}
             className="inline-flex items-center gap-2 rounded-xl bg-emerald-ink px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-ink-deep"
           >
             <Mail className="h-4 w-4" />
@@ -114,7 +114,7 @@ export default function CaseStudy() {
 
       <ProjectMeta
         rows={[
-          { label: "Timeline", value: "2024 – present" },
+          { label: "Timeline", value: "Sept 2025 – present" },
           { label: "Role", value: "Product · architecture · data model · AI integration" },
           { label: "Stack", value: "Next.js · FastAPI · Supabase · Gemini · Arduino" },
           { label: "Users", value: "Owner + spouse, single household" },
@@ -448,7 +448,7 @@ export default function CaseStudy() {
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           <a
-            href={site.demoMailto("Household operations platform (Oikero)")}
+            href={site.demoMailto("Household operations platform")}
             className="inline-flex items-center gap-2 rounded-xl bg-emerald-ink px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-ink-deep"
           >
             <Mail className="h-4 w-4" />

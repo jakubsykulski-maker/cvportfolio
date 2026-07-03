@@ -52,7 +52,7 @@ export function IconCard({
   );
 }
 
-/* ── Oikero module grid ───────────────────────────────────────────── */
+/* ── Household-platform module grid ───────────────────────────────── */
 
 export type ModuleTone =
   | "blue"
@@ -131,8 +131,8 @@ const STEP_TONE: Record<StepTone, string> = {
 };
 
 /** Numbered step in a pipeline or workflow grid. Same shape across
- *  both case studies; tone differs (French uses accent blue, Oikero
- *  uses emerald to match its "Insurance" green). */
+ *  both case studies; tone differs (French uses accent blue, the
+ *  household platform uses emerald to match its "Insurance" green). */
 export function NumberedStep({
   n,
   icon,
@@ -188,7 +188,7 @@ export function StackBox({ label, items }: { label: string; items: string[] }) {
  *  it can't collide with the screenshot's own header text.
  *
  *  `variant: "dark"` wraps in a near-black frame for dashboard shots
- *  with their own dark chrome (Oikero); `"light"` uses a cream tint
+ *  with their own dark chrome (household platform); `"light"` a cream tint
  *  for screenshots with light backgrounds (French app).
  *
  *  `sizes` defaults to a single-column layout (`100vw` mobile, 1000px

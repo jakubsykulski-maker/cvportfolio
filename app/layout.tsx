@@ -18,14 +18,14 @@ const literata = Literata({
 /**
  * OG title + description tuned to LinkedIn / Twitter / Slack
  * preview-card character budgets:
- *   - title:       50–60 characters (this one ≈ 58)
- *   - description: 110–160 characters (this one ≈ 155)
+ *   - title:       50–60 characters (this one ≈ 52)
+ *   - description: 110–160 characters (this one ≈ 154)
  * Below those, social cards look thin; above, they get truncated
  * mid-word. Counts checked manually via opengraph.xyz.
  */
-const OG_TITLE = "Jakub Sykulski — Operations, Analytics & AI tooling";
+const OG_TITLE = "Jakub Sykulski — Operations, Business Analysis & BI";
 const OG_DESCRIPTION =
-  "Operations and analytics professional with 8+ years across BIS, Stuart (DPD) and FlixBus. Now building AI-assisted internal tools — case studies inside.";
+  "Operations & business analysis professional — 8+ years across BIS, Stuart (DPD) and FlixBus. Now building AI-assisted internal tools. Case studies inside.";
 
 export const metadata: Metadata = {
   // Absolute base for OG / Twitter image URLs. Without this, Next

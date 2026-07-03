@@ -109,7 +109,7 @@ export default function CaseStudy() {
           { label: "Timeline", value: "Sept 2025 – present" },
           { label: "Role", value: "Product · data model · prompt design · AI integration" },
           { label: "Stack", value: "Next.js · FastAPI · Supabase · Gemini" },
-          { label: "Users", value: "Owner + classmates (~10), private" },
+          { label: "Users", value: "Personal coursework tool · tested with classmates" },
           { label: "Status", value: "Working prototype · in daily use" },
         ]}
       />
@@ -222,9 +222,10 @@ export default function CaseStudy() {
       >
         <p className="max-w-3xl text-[16px] leading-[1.75] text-stone-700">
           Most AI-assisted prototypes ship the happy path and call it done.
-          This one was built as if real users (my classmates) depended on it,
-          which meant treating security, observability and dependency
-          hygiene as first-class concerns — not afterthoughts.
+          This one was built for my own daily coursework and tested with
+          classmates during the course, which meant treating security,
+          observability and dependency hygiene as first-class concerns —
+          not afterthoughts.
         </p>
         <ul className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2">
           <IconCard

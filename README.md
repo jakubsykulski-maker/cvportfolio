@@ -56,7 +56,7 @@ upload, card detail and revision-library screens were
 intentionally skipped from the v1 product tour; capture them
 later if the tour grows.
 
-### Household ops platform (Oikero) — `public/case-studies/oikero/`
+### Household ops platform — `public/case-studies/oikero/`
 
 | Filename                     | What                                                              | Mock before capture                                                |
 | ---------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------ |
@@ -67,7 +67,7 @@ later if the tour grows.
 | `lab-result.jpg`             | Lab result trends vs reference range                               | Person name, lab name, test names, numeric results, ranges         |
 | `plants.jpg`                 | Plants list with moisture status                                   | Plant names, room labels, moisture % values                        |
 
-Every figure on a Oikero screen is sensitive. Mock everything, or
+Every figure on a household-platform screen is sensitive. Mock everything, or
 spin up a fresh household with seed data, before capture. The
 five-module home dashboard and the claim-detail AI-prefill view
 are not yet wired — the page hero uses `investments.jpg` instead.
