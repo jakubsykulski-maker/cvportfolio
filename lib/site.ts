@@ -18,6 +18,24 @@ export const site = {
   email: "jakub.sykulski@gmail.com",
   phone: "+41 76 746 5124",
 
+  // The single fact a recruiter scans for — rendered as a green-dot
+  // chip in the hero. Keep in sync with now.bullets[2].
+  availability:
+    "Open to Operations · Business Analysis · Reporting & BI — Geneva–Lausanne",
+
+  // One-click artifact for recruiters; the file lives in /public.
+  // Replace public/Jakub-Sykulski-CV.pdf when the CV updates.
+  cvPdf: "/Jakub-Sykulski-CV.pdf",
+
+  // Employer names recruiters pattern-match on — rendered as quiet
+  // chips under the hero summary. Employers only; certs stay in the
+  // Education section so the strip never overclaims.
+  previously: [
+    "Bank for International Settlements · Basel",
+    "Stuart (DPD Group) · Warsaw",
+    "FlixBus · Warsaw",
+  ],
+
   // Public profiles. Update once GitHub username is confirmed for public use.
   github: "https://github.com/jakubsykulski-maker",
   linkedin: "https://www.linkedin.com/in/jakub-sykulski/",
@@ -50,6 +68,9 @@ export type CaseStudy = {
   /** Short, scannable chips of concrete facts. Recruiters skim these
    *  in 2 s; longer copy lives inside the case study itself. */
   stats: string[];
+  /** Approximate read time of the full case study — sets the
+   *  recruiter's expectation before the click. */
+  readMinutes: number;
 };
 
 export const caseStudies: CaseStudy[] = [
@@ -74,6 +95,7 @@ export const caseStudies: CaseStudy[] = [
       "Event-sourced portfolio",
       "Arduino-ready",
     ],
+    readMinutes: 4,
   },
   {
     slug: "french-ai-learning-app",
@@ -96,6 +118,7 @@ export const caseStudies: CaseStudy[] = [
       "60-second lifecycle",
       "Print-ready revision sheets",
     ],
+    readMinutes: 3,
   },
 ];
 

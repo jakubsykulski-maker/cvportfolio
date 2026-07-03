@@ -9,14 +9,16 @@ export function Section({
   title,
   children,
   className = "",
+  id,
 }: {
   eyebrow?: string;
   title?: string;
   children: ReactNode;
   className?: string;
+  id?: string;
 }) {
   return (
-    <section className={`mt-20 md:mt-28 ${className}`}>
+    <section id={id} className={`mt-20 scroll-mt-24 md:mt-28 ${className}`}>
       {eyebrow ? (
         <p className="text-[0.78rem] font-bold uppercase tracking-[0.14em] text-stone-500">
           {eyebrow}

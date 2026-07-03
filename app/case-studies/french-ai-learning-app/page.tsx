@@ -29,6 +29,7 @@ import {
   ScanLine,
   Database,
   Eye,
+  FileDown,
 } from "lucide-react";
 import { Hairline, Section } from "@/components/section";
 import { CopyButton } from "@/components/copy-button";
@@ -346,6 +347,15 @@ export default function CaseStudy() {
           >
             <Mail className="h-4 w-4" />
             Request demo
+          </a>
+          <a
+            href={site.cvPdf}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-xl border border-stone-300/70 bg-white/60 px-4 py-2 text-sm font-semibold text-stone-700 transition hover:bg-white"
+          >
+            <FileDown className="h-4 w-4" />
+            Download CV (PDF)
           </a>
           <a
             href={site.github}

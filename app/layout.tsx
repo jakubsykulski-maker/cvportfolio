@@ -74,7 +74,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${sora.variable} ${literata.variable}`}>
+    <html
+      lang="en"
+      className={`${sora.variable} ${literata.variable} scroll-smooth`}
+    >
       <body className="min-h-screen antialiased">{children}</body>
     </html>
   );

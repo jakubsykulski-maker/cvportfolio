@@ -91,6 +91,17 @@ body {
   }
 }
 
+/* Respect reduced-motion: freeze the shimmer, disable smooth
+   anchor scrolling. */
+@media (prefers-reduced-motion: reduce) {
+  .shimmer {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 /* Subtle dotted grid for backdrop sections. */
 .grid-bg {
   background-image: radial-gradient(
