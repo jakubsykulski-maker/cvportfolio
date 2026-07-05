@@ -13,7 +13,7 @@ export const site = {
   languages: "EN proficient · FR intermediate (B2.1) · PL native",
 
   summary:
-    "Operations and business analysis professional with 8+ years across the Bank for International Settlements, Stuart (DPD Group), and FlixBus. Since 2025, building AI-assisted internal prototypes around a single pattern — messy input becomes structured, validated, auditable data. Two working prototypes so far, both private: a household operations platform in daily use, and a language-learning app built for my own coursework.",
+    "Operations and business analysis professional with 8+ years across the Bank for International Settlements, Stuart (DPD Group), and FlixBus. Since 2025, building AI-assisted internal prototypes around a single pattern: messy input becomes structured, validated, auditable data. Two working prototypes so far, both private: a household operations platform in daily use, and a language-learning app built for my own coursework.",
 
   email: "jakub.sykulski@gmail.com",
   phone: "+41 76 746 5124",
@@ -21,7 +21,7 @@ export const site = {
   // The single fact a recruiter scans for — rendered as a green-dot
   // chip in the hero. Keep in sync with now.bullets[2].
   availability:
-    "Open to Operations · Business Analysis · Reporting & BI — Geneva–Lausanne",
+    "Open to Operations · Business Analysis · Reporting & BI roles in Geneva–Lausanne",
 
   // One-click artifact for recruiters; the file lives in /public.
   // Replace public/Jakub-Sykulski-CV.pdf when the CV updates.
@@ -47,7 +47,7 @@ export const site = {
   // Used by mailto buttons. Stable subject = recruiter filter friendly.
   demoMailto: (caseStudy: string) =>
     `mailto:jakub.sykulski@gmail.com?subject=${encodeURIComponent(
-      `Demo access — ${caseStudy}`,
+      `Demo access: ${caseStudy}`,
     )}&body=${encodeURIComponent(
       "Hi Jakub,\n\nI saw your case study at https://jakubsykulski.com\n\nI'd like to see a live demo. Could you share access?\n\nThanks,\n",
     )}`,
@@ -78,7 +78,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "household-ops-platform",
     title: "Household operations platform",
     oneLiner:
-      "Five-module household OS — investments, insurance, budget, lab results, plants — with AI-assisted insurance claim intake via Gemini.",
+      "Five-module household OS (investments, insurance, budget, lab results, plants) with AI-assisted insurance claim intake via Gemini.",
     domain: "Insurance · Wealth · Health · Document AI",
     status: "Private · in daily use",
     href: "/case-studies/household-ops-platform",
@@ -130,8 +130,8 @@ export const experience = [
     bullets: [
       "Completing a full-time intensive French programme (Interlangue and Voxea, Lausanne; 17.5 hours/week in class), progressing from A2.1 to B2.1 in four months.",
       "Working a single pattern across two working prototypes: messy input → structured, validated data via Gemini with response_schema, persisted with audit trail and human review. Both private, both working end-to-end.",
-      "Household operations platform — five modules (investments, insurance claims, budget, lab results, plants) with AI-assisted claim document intake (Gemini 2.5 Flash → Pydantic-validated claim fields). Event-sourced investments, immutable audit log, household-scoped Row Level Security as defence-in-depth. In daily use.",
-      "French Learning App — photo of handwritten classroom notes → structured vocabulary cards with multi-focus extraction (vocab, grammar, conjugation, translation), print-ready revision output. Three-layer defence against prompt injection.",
+      "Household operations platform: five modules (investments, insurance claims, budget, lab results, plants) with AI-assisted claim document intake (Gemini 2.5 Flash → Pydantic-validated claim fields). Event-sourced investments, immutable audit log, household-scoped Row Level Security as defence-in-depth. In daily use.",
+      "French Learning App: photo of handwritten classroom notes → structured vocabulary cards with multi-focus extraction (vocab, grammar, conjugation, translation), print-ready revision output. Three-layer defence against prompt injection.",
       "Across both: defined the data model, designed the prompt architecture, made the product cuts, and accelerated implementation with Cursor, Claude Code and Codex.",
     ],
   },
@@ -140,7 +140,7 @@ export const experience = [
     org: "Bank for International Settlements · Basel",
     period: "November 2024 – August 2025 · Fixed-term via Swisslinx AG",
     bullets: [
-      "Innovation Hub Strategy Team: supported coordination of strategic projects across eight global innovation teams — planning calendars, trackers, documentation and deliverable follow-up across multiple time zones.",
+      "Innovation Hub Strategy Team: supported coordination of strategic projects across eight global innovation teams: planning calendars, trackers, documentation and deliverable follow-up across multiple time zones.",
       "Built planning templates and data structures for resource and scenario planning, aligning delivery goals with available capacity.",
       "Prepared reporting, presentations and analysis for the Head of the Strategy Team, informing resourcing priorities and delivery timelines.",
       "Coordinated the BIS Academia Workshop (CHF 200,000 budget) end-to-end, including final reporting.",
@@ -154,7 +154,7 @@ export const experience = [
       "Built 50+ dashboards in SQL, Excel, Power BI and Tableau used for daily operational and management decisions across 7 cities.",
       "Delivered analyses and presentations directly to Stuart Poland's General Manager, including centralised courier-compensation (\"multiplier\") management supporting demand-based pricing decisions.",
       "Coordinated capacity planning for a courier network scaling from 120 to 800 weekly couriers alongside 600%+ delivery volume growth; trained City Managers and colleagues on dashboards and reporting tools.",
-      "Managed €500k+ monthly courier payouts with automated verification — 100% payout accuracy.",
+      "Managed €500k+ monthly courier payouts with automated verification, reaching 100% payout accuracy.",
       "Reduced financial losses ~50% on €350k/month courier transactions via fraud-detection controls (with Data & Finance).",
       "Designed automated weekly reporting: SQL → Excel → Mailchimp pipeline delivering personalised performance reports to 800+ couriers, and SQL → Excel → PowerPoint KPI presentations for partner restaurants.",
     ],
@@ -182,8 +182,8 @@ export const now = {
   // *this month*. Force the cycle.
   month: "July 2026",
   bullets: [
-    "Completing a full-time intensive French programme in Lausanne (Interlangue & Voxea) — 17.5 hours/week in class, A2.1 to B2.1 in four months.",
-    "Iterating on the household operations platform — five modules in daily use, AI-assisted insurance claim intake working end-to-end for two household members.",
+    "Completing a full-time intensive French programme in Lausanne (Interlangue & Voxea): 17.5 hours/week in class, A2.1 to B2.1 in four months.",
+    "Iterating on the household operations platform: five modules in daily use, with AI-assisted insurance claim intake working end-to-end for two household members.",
     "Open to Operations & Business Analysis and Reporting & BI roles in the Geneva–Lausanne area. Insurance, wealth and healthtech especially welcome.",
   ],
 };
@@ -212,7 +212,7 @@ export const principles = [
   },
   {
     title: "Write the decisions down.",
-    body: "Every non-trivial call lives in a doc — AGENTS.md, SECURITY.md, ITALIAN-ROLLOUT.md, PORTFOLIO_INVENTORY.md. Future-me gets the why, not just the what.",
+    body: "Every non-trivial call lives in a doc: AGENTS.md, SECURITY.md, ITALIAN-ROLLOUT.md, PORTFOLIO_INVENTORY.md. Future-me gets the why, not just the what.",
   },
 ];
 
@@ -237,6 +237,6 @@ export const education = [
 ];
 
 export const certifications = [
-  "Leveraging Big Data for Business Intelligence — University of Cambridge (online programme, 2024)",
-  "Data Science for Business — Harvard Business School (online programme, 2024)",
+  "Leveraging Big Data for Business Intelligence · University of Cambridge (online programme, 2024)",
+  "Data Science for Business · Harvard Business School (online programme, 2024)",
 ];

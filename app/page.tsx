@@ -220,7 +220,7 @@ export default function Home() {
         {/* ── Case studies (the proof — straight after the hero) ──── */}
         <Section id="work" eyebrow="Selected work" title="Case studies">
           <p className="-mt-2 max-w-2xl text-[15px] leading-[1.65] text-stone-600">
-            Two private AI-assisted prototypes around the same pattern —
+            Two private AI-assisted prototypes around the same pattern:
             messy input becomes structured, validated data. Click either
             card for the full architecture, decisions and screenshots.
           </p>
@@ -444,7 +444,7 @@ export default function Home() {
         {/* ── Contact CTA — the page shouldn't end without an ask ── */}
         <Section id="contact" eyebrow="Contact" title="Let's talk">
           <p className="max-w-3xl text-[16px] leading-[1.75] text-stone-700">
-            The fastest way to reach me is email — send a role description
+            The fastest way to reach me is email. Send a role description
             and I&apos;ll answer honestly whether it fits. Happy to walk
             through either case study on a 20-minute call.
           </p>

@@ -50,13 +50,13 @@ import {
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Household operations platform — Case Study · Jakub Sykulski",
+  title: "Household operations platform · Case Study · Jakub Sykulski",
   description:
-    "A modular private platform that unifies investments, insurance claims, budget, lab results and plant monitoring — with AI-assisted insurance claim intake via Gemini.",
+    "A modular private platform that unifies investments, insurance claims, budget, lab results and plant monitoring, with AI-assisted insurance claim intake via Gemini.",
   robots: { index: false, follow: false },
 };
 
-const CV_SUMMARY = `Household Operations Platform — AI-assisted modular prototype
+const CV_SUMMARY = `Household Operations Platform: AI-assisted modular prototype
 Designed and built a private five-module household operations platform (investments, insurance claims, budget, lab results, plants) on Next.js, FastAPI and Supabase. The AI core is a Gemini 2.5 Flash pipeline that turns insurance claim documents (PDFs, photos) into structured, Pydantic-validated claim fields with response_schema, optional human-in-the-loop review, and full audit trail. Engineering depth: event-sourced investments, immutable audit log (DB trigger), Row Level Security as defence-in-depth, household-scoped data model. Same scan-to-structured-data pipeline transfers directly to enterprise claims intake.`;
 
 export default function CaseStudy() {
@@ -82,8 +82,8 @@ export default function CaseStudy() {
           with AI-assisted claim intake.
         </h1>
         <p className="mt-5 max-w-3xl text-[17px] leading-[1.7] text-stone-700 md:text-lg">
-          Five modules — investments, insurance claims, budget, lab results,
-          plant monitoring — sharing one household-scoped data model. The AI
+          Five modules (investments, insurance claims, budget, lab results,
+          plant monitoring) sharing one household-scoped data model. The AI
           core turns insurance claim documents into structured, validated
           claim fields through Gemini with response_schema and human review.
           A private working prototype for one household; the architecture is the
@@ -142,7 +142,7 @@ export default function CaseStudy() {
           <p>
             The platform pulls each stream into one household-scoped data
             model with consistent auth, audit and storage, and applies AI
-            only where it pays off — on the messiest input, insurance claim
+            only where it pays off: the messiest input, insurance claim
             documents.
           </p>
         </div>
@@ -189,7 +189,7 @@ export default function CaseStudy() {
           <ModuleCard
             icon={<Layers />}
             tone="stone"
-            title="Home — control centre"
+            title="Home control centre"
             tagline="Attention state across all modules"
             body="Top-level dashboard surfaces only what needs attention: unverified labs, claims awaiting reimbursement, plants below moisture threshold, market refresh errors. The platform decides what to show next."
           />
@@ -222,7 +222,7 @@ export default function CaseStudy() {
         <ul className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2">
           <TitleBodyCard
             title="response_schema, not free-text JSON"
-            body="Gemini is invoked with response_mime_type=application/json and a hand-written response_schema covering every claim field. Output is then re-validated through a Pydantic ExtractionResult with field-level validators (dates, currency, amounts, tag limits). Two gates, two formats — the same drift bug has to escape both."
+            body="Gemini is invoked with response_mime_type=application/json and a hand-written response_schema covering every claim field. Output is then re-validated through a Pydantic ExtractionResult with field-level validators (dates, currency, amounts, tag limits). Two gates, two formats; the same drift bug has to escape both."
           />
           <TitleBodyCard
             title="Human-in-the-loop is the default"
@@ -234,7 +234,7 @@ export default function CaseStudy() {
           />
           <TitleBodyCard
             title="Rate limited and key-gated"
-            body="The AI extraction endpoints sit on a parse tier (10 req/min). Missing GEMINI_API_KEY in the environment makes the route fail closed with an explicit error — production won't silently degrade to a different code path."
+            body="The AI extraction endpoints sit on a parse tier (10 req/min). Missing GEMINI_API_KEY in the environment makes the route fail closed with an explicit error, so production won't silently degrade to a different code path."
           />
         </ul>
       </Section>
@@ -304,22 +304,22 @@ export default function CaseStudy() {
           />
           <TitleBodyCard
             title="Event-sourced investments"
-            body="Holdings and snapshots are derived from a portfolio_events table that is the single source of truth. Re-importing a corrected CSV doesn't mutate state — it appends events, and the daily snapshot pipeline rebuilds from there. Audit and correctness for free."
+            body="Holdings and snapshots are derived from a portfolio_events table that is the single source of truth. Re-importing a corrected CSV doesn't mutate state; it appends events, and the daily snapshot pipeline rebuilds from there. Audit and correctness for free."
           />
           <TitleBodyCard
             title="FastAPI owns the business logic"
-            body="Next.js stays thin — no API routes for domain data. Every domain call goes to FastAPI, which holds Pydantic schemas, household scoping, rate limits and the Gemini calls. The frontend can be rewritten without touching business logic, and the API can outlive the frontend."
+            body="Next.js stays thin: no API routes for domain data. Every domain call goes to FastAPI, which holds Pydantic schemas, household scoping, rate limits and the Gemini calls. The frontend can be rewritten without touching business logic, and the API can outlive the frontend."
           />
           <TitleBodyCard
             title="Supabase as plumbing, not as the app"
-            body="Postgres + Auth + Storage. The backend uses the service_role key from server-side; the frontend never queries domain tables directly. Supabase is the database, not the application layer — which means it can be swapped for raw Postgres later if it ever stops fitting."
+            body="Postgres + Auth + Storage. The backend uses the service_role key from server-side; the frontend never queries domain tables directly. Supabase is the database, not the application layer, which means it can be swapped for raw Postgres later if it ever stops fitting."
           />
           <TitleBodyCard
             title="Deterministic for labs, LLM only for claims"
-            body="Lab PDFs come from a small number of providers with stable layouts — a rule-based pdfplumber pipeline handles them with no token cost and full reproducibility. Insurance claim documents have no stable layout — that's where the LLM earns its keep. Match the tool to the shape of the data."
+            body="Lab PDFs come from a small number of providers with stable layouts, so a rule-based pdfplumber pipeline handles them with no token cost and full reproducibility. Insurance claim documents have no stable layout; that's where the LLM earns its keep. Match the tool to the shape of the data."
           />
           <TitleBodyCard
-            title="Cash Flow Lite — chose less"
+            title="Cash Flow Lite: chose less"
             body="A full budget app would have meant categorising every transaction across every bank. Instead I built the minimum that answers the actual question: where did the money go this month, roughly? Detailed expense tracking is deferred behind a feature flag rather than half-built."
           />
         </div>
@@ -344,7 +344,7 @@ export default function CaseStudy() {
           <IconCard
             icon={<Lock />}
             title="Row Level Security as defence-in-depth"
-            body="Application-layer scoping is primary: every request carries a UserContext, and verify_household_access() runs on every sensitive route. Row Level Security on 16 domain tables is the fallback — if the application layer ever has a bug, a leaked anon key still can't cross household boundaries."
+            body="Application-layer scoping is primary: every request carries a UserContext, and verify_household_access() runs on every sensitive route. Row Level Security on 16 domain tables is the fallback: if the application layer ever has a bug, a leaked anon key still can't cross household boundaries."
           />
           <IconCard
             icon={<Database />}
@@ -395,7 +395,7 @@ export default function CaseStudy() {
           <p className="mt-3 max-w-3xl text-[16px] leading-[1.75] text-stone-700">
             The same shape applies to lab-result extraction from external
             providers, meeting-note triage, or policy-document compliance
-            checks. The model is the easy part — what makes it work in
+            checks. The model is the easy part. What makes it work in
             production is the schema, the validators, the human-in-the-loop
             UX, and the audit log around it. All four are already in this
             codebase.
@@ -412,12 +412,12 @@ export default function CaseStudy() {
         </p>
         <ul className="mt-6 grid grid-cols-1 gap-3 text-[15px] leading-[1.7] text-stone-700 md:grid-cols-2">
           {[
-            "Picked the modules and the order to build them in — started with investments (the highest-pain household problem) and let it shape the shared foundations.",
-            "Designed the data model — household scoping, event-sourced investments, audit log as a first-class table.",
+            "Picked the modules and the order to build them in: started with investments, the highest-pain household problem, and let it shape the shared foundations.",
+            "Designed the data model: household scoping, event-sourced investments, audit log as a first-class table.",
             "Wrote the Gemini extraction schema, the prompt, and the human-review contract; chose where AI helps and where it doesn't.",
-            "Made the cuts — deferred budget-planning UI, retired the Streamlit MVP, rejected auto-provisioning on login.",
+            "Made the cuts: deferred budget-planning UI, retired the Streamlit MVP, rejected auto-provisioning on login.",
             "Directed and reviewed AI-assisted implementation across frontend, backend and SQL migrations; treated AI output as a draft, not a finished commit.",
-            "Operate it daily across two household members — every weak spot surfaces fast, gets fixed, and feeds back into the architecture.",
+            "Operate it daily across two household members, so every weak spot surfaces fast, gets fixed, and feeds back into the architecture.",
           ].map((line) => (
             <li key={line} className="relative pl-5">
               <span className="absolute left-0 top-[0.7em] h-1.5 w-1.5 rounded-full bg-stone-400" />
@@ -504,7 +504,7 @@ function HeroDashboardSlot() {
       <div className="relative overflow-hidden rounded-3xl border border-stone-200/60 bg-screen-dark shadow-[0_24px_72px_rgba(15,32,40,0.25)]">
         <Image
           src="/case-studies/oikero/investments.jpg"
-          alt="Investments dashboard of the household operations platform — total value, daily change, valuation coverage, portfolio performance chart and period P/L."
+          alt="Investments dashboard of the household operations platform: total value, daily change, valuation coverage, portfolio performance chart and period P/L."
           width={1292}
           height={1440}
           sizes="(min-width: 768px) 1000px, 100vw"
@@ -513,7 +513,7 @@ function HeroDashboardSlot() {
         />
       </div>
       <figcaption className="mt-3 text-[14px] leading-[1.55] text-stone-600">
-        Investments — event-sourced portfolio derived from a
+        Investments: event-sourced portfolio derived from a
         portfolio_events log, valued daily against yfinance and
         Frankfurter feeds. One of five modules sharing the same auth,
         household model and storage pattern.

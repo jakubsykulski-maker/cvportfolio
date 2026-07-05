@@ -43,6 +43,10 @@ mode is "scan in 6 seconds, optional 3-minute deep dive."
 - **Copy tone:** recruiter-first, concrete, no marketing adjectives. State
   facts a reader can verify. The principles in `lib/site.ts` set the
   voice — match it.
+- **No em-dashes ("—") in rendered copy.** They read as AI-generated.
+  Use a colon, semicolon, comma, parentheses, or split the sentence.
+  En-dashes in ranges (2024 – 2025, Geneva–Lausanne), "·" separators
+  and "→" pipeline notation are fine. Code comments are exempt.
 - **Cut features, don't half-build.** TASKS.md is the living roadmap;
   every item should be doable in ≤3h. Bigger = break down or defer.
 

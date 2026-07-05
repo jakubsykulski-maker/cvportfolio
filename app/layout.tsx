@@ -23,9 +23,9 @@ const literata = Literata({
  * Below those, social cards look thin; above, they get truncated
  * mid-word. Counts checked manually via opengraph.xyz.
  */
-const OG_TITLE = "Jakub Sykulski — Operations, Business Analysis & BI";
+const OG_TITLE = "Jakub Sykulski · Operations, Business Analysis & BI";
 const OG_DESCRIPTION =
-  "Operations & business analysis professional — 8+ years across BIS, Stuart (DPD) and FlixBus. Now building AI-assisted internal tools. Case studies inside.";
+  "Operations & business analysis professional with 8+ years across BIS, Stuart (DPD) and FlixBus. Now building AI-assisted internal tools. Case studies inside.";
 
 export const metadata: Metadata = {
   // Absolute base for OG / Twitter image URLs. Without this, Next
